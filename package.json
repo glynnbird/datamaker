@@ -1,0 +1,37 @@
+{
+  "name": "datagenerator",
+  "version": "0.1.0",
+  "description": "Sample data generator - command-line utility and library",
+  "main": "index.js",
+  "scripts": {
+    "standard": "standard --fix"
+  },
+  "bin": {
+    "datagenerator": "datagenerator.bin.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glynnbird/datagenerator.git"
+  },
+  "keywords": [
+    "Data",
+    "Generator",
+    "CSV",
+    "JSON",
+    "XML",
+    "CouchDB"
+  ],
+  "author": "Glynn Bird <glynn.bird@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/glynnbird/datagenerator/issues"
+  },
+  "homepage": "https://github.com/glynnbird/datagenerator#readme",
+  "dependencies": {
+    "async": "^2.6.1",
+    "yargs": "^12.0.1"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
+  }
+}
