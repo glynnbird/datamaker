@@ -550,12 +550,17 @@ e.g.
 
 Timestamp in milliseconds since 1970.
 
-Parameters: none
+Parameters: 
+
+- min - minimum timestamp (default 0)
+- max - maximum timestamp (default 'now')
 
 e.g.
 
 ```
 {{timestamp}} ---> 351543517819
+{{timestamp 946684800000}} --> 1163308913102  // timestamp after 2000-01-01
+{{timestamp 946684800000 978307200000}} --> 1163308913102  // timestamp in year 2000
 ```
 
 ### {{title}}
