@@ -151,7 +151,7 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 The code for the tags can be found in the `plugins` folder of the source code.
 
 - A-E - [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email)
-- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [oneof](#oneof)
+- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [oneof](#oneof) [normal](#normal)
 - P-T - [postcode](#postcode) [price](#state) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
 - U-Z - [url](#url) [uuid](#uuid) [website](#website) [word](#) [words](#words) [zip](#zip)
 
@@ -459,6 +459,23 @@ e.g.
 ```
 {{oneof new provisional complete}} ---> provisional
 {{oneof new provisional complete}} ---> new
+```
+
+### {{normal}}
+
+Generates numbers on a normal distribution
+
+Parameters: 
+
+- mean - centre of distribution (default 50)
+- stddev - standard deviation (default 1)
+- decimalPlaces - number of decimal places (default 4)
+
+e.g.
+
+```
+{{normal}} ---> 50.1097
+{{normal 20000 1000 2}} ---> 20370.88
 ```
 
 ### {{postcode}}
