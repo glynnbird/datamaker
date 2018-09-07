@@ -1,7 +1,7 @@
-module.exports = () => {
-  const now = new Date().getTime()
-  const r = Math.floor(Math.random() * now)
-  const d = new Date(r).toISOString()
+const date_iso = require('./date_iso.js')
+
+module.exports = (min, max) => {
+  const d = date_iso(min, max)
   const parts = d.split('T')
   return parts[0]
 }

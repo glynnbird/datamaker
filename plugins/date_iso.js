@@ -1,6 +1,14 @@
-module.exports = () => {
-  const now = new Date().getTime()
-  const r = Math.floor(Math.random() * now)
-  const d = new Date(r)
-  return d.toISOString()
+module.exports = (min, max) => {
+  if (min) {
+    min = new Date(min).getTime()
+  } else {
+    min = 0
+  }
+  if (max) {
+    max = new Date(max).getTime()
+  } else {
+    max = new Date()
+  }
+  const ts = Math.floor(min + Math.random() * (max - min))
+  return new Date(ts).toISOString()
 }

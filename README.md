@@ -278,24 +278,34 @@ e.g.
 
 Random date in YYYY-MM-DD format.
 
-Parameters: none
+Parameters: 
+
+- min - minimum date (default '1970-01-01')
+- max - maximum date (default 'now')
 
 e.g.
 
 ```
 {{date}} ---> 1977-02-28
+{{date 2015-01-01}} ---> 2018-08-02 // date after 2015-01-01
+{{date 2015-01-01 2016-01-01}} ---> 2015-04-23 // date in 2015
 ```
 
 ### {{date_iso}}
 
 Random date in ISO-8601 format.
 
-Parameters: none
+Parameters: 
+
+- min - minimum date (default '1970-01-01')
+- max - maximum date (default 'now')
 
 e.g.
 
 ```
 {{date_iso}} ---> 2013-05-24T02:44:04.687Z
+{{date_iso 2015-01-01}} ---> 2018-07-09T22:15:30.512Z // date after 2015-01-01
+{{date_iso 2015-01-01 2016-01-01}} ---> 2015-04-21T18:08:33.979Z // date in 2015
 ```
 
 ### {{digits}}
@@ -560,7 +570,7 @@ e.g.
 ```
 {{timestamp}} ---> 351543517819
 {{timestamp 946684800000}} --> 1163308913102  // timestamp after 2000-01-01
-{{timestamp 946684800000 978307200000}} --> 1163308913102  // timestamp in year 2000
+{{timestamp 946684800000 978307200000}} --> 959753617250  // timestamp in year 2000
 ```
 
 ### {{title}}
