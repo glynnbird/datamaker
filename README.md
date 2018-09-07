@@ -150,10 +150,10 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 
 The code for the tags can be found in the `plugins` folder of the source code.
 
-- A-E - [{{airport}}](#{{airport}}) [{{autoinc}}](#{{autoinc}}) [{{boolean}}](#{{boolean}}) [{{cat}}](#{{cat}}) [{{city}}](#{{city}}) [{{company}}](#{{company}}) [{{country}}](#{{country}}) [{{creditcard}}](#{{creditcard}}) [{{currency}}](#{{currency}}) [{{date}}](#{{date}}) [{{date_iso}}](#{{date_iso}}) [{{digits}}](#{{digits}}) [{{dog}}](#{{dog}}) [{{domainname}}](#{{domainname}}) [{{email}}](#{{email}})
-- F-O - [{{firstname}}](#{{firstname}}) [{{float}}](#{{float}}) [{{integer}}](#{{integer}}) [{{latitude}}](#{{latitude}}) [{{letters}}](#{{letters}}) [{{longitude}}](#{{longitude}}) [{{oneof}}](#{{oneof}})
-- P-T - [{{postcode}}](#{{postcode}}) [{{price}}](#{{state}}) [{{state}}](#{{statecode}}) [{{statecode}}](#{{statecode}}) [{{street}}](#{{street}}) [{{surname}}](#{{surname}}) [{{tel}}](#{{tel}}) [{{time}}](#{{time}}) [{{timestamp}}](#{{timestamp}}) [{{title}}](#{{title}}) [{{tld}}](#{{tld}}) [{{town}}](#{{town}})
-- U-Z - [{{url}}](#{{url}}) [{{uuid}}](#{{uuid}}) [{{website}}](#{{website}}) [{{word}}](#{{}}) [{{words}}](#{{words}}) [{{zip}}](#{{zip}})
+- A-E - [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email)
+- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [oneof](#oneof)
+- P-T - [postcode](#postcode) [price](#state) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
+- U-Z - [url](#url) [uuid](#uuid) [website](#website) [word](#) [words](#words) [zip](#zip)
 
 ### {{airport}}
 
