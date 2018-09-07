@@ -10,14 +10,14 @@ let rs = null
 var argv = require('yargs')
   .option('format', { alias: 'f', describe: 'Format of output data: json,csv,none', demandOption: false, default: 'none' })
   .option('iterations', { alias: 'i', describe: 'Number of records to generater', demandOption: false, default: 1 })
-  .option('template', { alias: 't', describe: 'The path of the template file', demandOption: false})
-  .option('list', {alias: 'l', describe: 'List available tags', demandOption: false, default: false})
+  .option('template', { alias: 't', describe: 'The path of the template file', demandOption: false })
+  .option('list', { alias: 'l', describe: 'List available tags', demandOption: false, default: false })
   .help('help')
   .argv
 
 if (argv.list) {
   console.log(datagen.listTags())
-   process.exit()
+  process.exit()
 }
 
 // die with error code
@@ -35,7 +35,6 @@ if (piped) {
   }
   rs = fs.createReadStream(argv.template)
 }
-
 
 // make sure valid format has been supplied
 if (argv.format !== 'csv' && argv.format !== 'json' && argv.format !== 'none' && argv.format !== 'xml') {

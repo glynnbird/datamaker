@@ -93,7 +93,7 @@ const generate = (str, format, iterations) => {
 }
 
 const listTags = () => {
-  return fs.readdirSync('./plugins/').map((f) => { return '{{' + f.replace(/\.js$/,'' + '}}')}).join('\n')
+  return fs.readdirSync('./plugins/').map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
 }
 
 module.exports = {
