@@ -1,4 +1,4 @@
-let options = [
+const options = [
   'Aaron',
   'Abbey',
   'Abbie',

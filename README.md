@@ -657,6 +657,20 @@ e.g.
 {{zip}} ---> 69882
 ```
 
+## Using as a library
+
+You can use this npm module as a library in your own code
+
+```js
+let dg = require('datagenerator')
+const template = '{{title}} {{firstname}} {{surname}}'
+const format = 'none'
+const iterations = 500
+dg.generate(template, format, iterations)
+  .on('data', (d) => { console.log(d) })
+  .on('end', (d) => { console.error('Done!') })
+```
+
 ## Formatting
 
 The `--formst`/`-f` parameter defines
