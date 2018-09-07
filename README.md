@@ -594,6 +594,18 @@ e.g.
 {{town}} ---> Dudley
 ```
 
+### {{url}}
+
+Full URL.
+
+Parameters: none
+
+e.g.
+
+```
+{{url}} ---> https://www.jovinianist.com/microcosmology.html?adrenalone=VEF0TSB23N04V8MO
+```
+
 ### {{uuid}}
 
 Unique identifier.
