@@ -1,5 +1,6 @@
 const EventEmitter = require('events')
 const a = require('async')
+const fs = require('fs')
 
 // locate occurences of things surrounded in double curly {{brackets}}
 const findTags = (str) => {
@@ -91,6 +92,11 @@ const generate = (str, format, iterations) => {
   return ee
 }
 
+const listTags = () => {
+  return fs.readdirSync('./plugins/').map((f) => { return '{{' + f.replace(/\.js$/,'' + '}}')}).join('\n')
+}
+
 module.exports = {
-  generate: generate
+  generate: generate,
+  listTags: listTags
 }

@@ -43,6 +43,7 @@ $ npm install --save datagenerator
 - `--template`/`-t` - the path of the template file e.g `--template /path/to/template.txt`
 - `--format`/`-f` - the target file format (`none`, `csv`, `json` or `xml`). Default `none` e.g. `--format json`
 - `--iterations`/`-i` - the number of records to create. Default `1` e.g. `--iterations 5000`
+- `--list`/`-l` - list the available tags 
 
 ## Generating CSV files
 

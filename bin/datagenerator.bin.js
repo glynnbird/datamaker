@@ -10,15 +10,14 @@ let rs = null
 var argv = require('yargs')
   .option('format', { alias: 'f', describe: 'Format of output data: json,csv,none', demandOption: false, default: 'none' })
   .option('iterations', { alias: 'i', describe: 'Number of records to generater', demandOption: false, default: 1 })
-  .option('template', { alias: 't', describe: 'The path of the template file', demandOption: !piped })
+  .option('template', { alias: 't', describe: 'The path of the template file', demandOption: false})
+  .option('list', {alias: 'l', describe: 'List available tags', demandOption: false, default: false})
   .help('help')
   .argv
 
-// detect if the format is being piped in
-if (piped) {
-  rs = process.stdin
-} else {
-  rs = fs.createReadStream(argv.template)
+if (argv.list) {
+  console.log(datagen.listTags())
+   process.exit()
 }
 
 // die with error code
@@ -26,6 +25,17 @@ var die = function (msg, errCode) {
   console.error('ERROR:' + msg)
   process.exit(errCode)
 }
+
+// detect if the format is being piped in
+if (piped) {
+  rs = process.stdin
+} else {
+  if (!argv.template) {
+    die('A template must be supplied')
+  }
+  rs = fs.createReadStream(argv.template)
+}
+
 
 // make sure valid format has been supplied
 if (argv.format !== 'csv' && argv.format !== 'json' && argv.format !== 'none' && argv.format !== 'xml') {
