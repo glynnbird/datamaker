@@ -48,7 +48,7 @@ const swap = (template, tags, formatter) => {
 
       // calculate the replacement
       const replacement = formatter.filter(code.apply(null, tag.parameters))
-  
+
       // switch the tag in the template for the replacement
       str = str.replace(tag.original, replacement)
     }
