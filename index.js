@@ -1,8 +1,9 @@
 const EventEmitter = require('events')
 const a = require('async')
 const fs = require('fs')
-const tagNames = fs.readdirSync('./plugins/').map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
 const path = require('path')
+const tagNames = fs.readdirSync(path.join(__dirname, 'plugins')).map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
+const formatterNames = fs.readdirSync(path.join(__dirname, 'formatters')).map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
 
 // locate occurences of things surrounded in double curly {{brackets}}
 const findTags = (str) => {
@@ -68,6 +69,9 @@ const generate = (str, format, iterations) => {
   const tags = findTags(str)
 
   // load the formatter code
+  if (!formatterNames.includes(format)) {
+    throw new Error('invalid format')
+  }
   const formatter = require(path.join(__dirname, 'formatters', format))
 
   // make "iterations" loops
