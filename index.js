@@ -2,6 +2,7 @@ const EventEmitter = require('events')
 const a = require('async')
 const fs = require('fs')
 const tagNames = fs.readdirSync('./plugins/').map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
+const path = require('path')
 
 // locate occurences of things surrounded in double curly {{brackets}}
 const findTags = (str) => {
@@ -44,7 +45,7 @@ const swap = (template, tags, formatter) => {
     // load the plugin
     const tag = tags[i]
     if (tagNames.includes(tag.tag)) {
-      const code = require('./plugins/' + tag.tag)
+      const code = require(path.join(__dirname, 'plugins', tag.tag))
 
       // calculate the replacement
       const replacement = formatter.filter(code.apply(null, tag.parameters))
@@ -67,7 +68,7 @@ const generate = (str, format, iterations) => {
   const tags = findTags(str)
 
   // load the formatter code
-  const formatter = require('./formatters/' + format)
+  const formatter = require(path.join(__dirname, 'formatters', format))
 
   // make "iterations" loops
   let i = 0
