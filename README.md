@@ -1,10 +1,10 @@
-# datagenerator
+# datamaker
 
 A command-line Node.js script and library that generates JSON or CSV data in bulk. If you are building an IT system, 
 then the chances are you'll need to populate a database (whether SQL or NoSQL) with some reasonably realistic data
 to test and benchmark with.
 
-The *datagenerator* tool allows sample data to be created by supplying:
+The *datamaker* tool allows sample data to be created by supplying:
 
 - a template of how the data is to look. The data can contain multiple placeholders where sample data will be inserted e.g. `{{firstname}},{{lastname}},{{date}}`.
 - the format of the output data: `none`, `json` or `csv`. This effects how the generated string data is processed prior to delivery.
@@ -13,7 +13,7 @@ The *datagenerator* tool allows sample data to be created by supplying:
 Quick example:
 
 ```sh
-$ echo "{{uuid}},{{date}},{{firstname}} {{surname}},{{email}}" | datagenerator --format csv --iterations 5
+$ echo "{{uuid}},{{date}},{{firstname}} {{surname}},{{email}}" | datamaker --format csv --iterations 5
 10U9SHHE2463IH9E,1970-10-12,Marylee Dodge,meagan-harwell@betaine.com
 379QYC80U5KYQP4D,1994-11-09,Melany Fuqua,jennette.labonte@yahoo.com
 DERC4Y2BQ6HCI0HI,1983-08-11,Cathleen Leal,earlenemattson@gmail.com
@@ -29,13 +29,13 @@ JDYSVPTAEXKEF9D8,1982-10-29,Dionne Vann,martin.renfro@hemicrane.com
 To install the command-line utility, use `npm`:
 
 ```sh
-$ npm install -g datagenerator
+$ npm install -g datamaker
 ```
 
 or add the library to an existing Node.js project:
 
 ```sh
-$ npm install --save datagenerator
+$ npm install --save datamaker
 ```
 
 ## Command-line parameters reference
@@ -55,16 +55,16 @@ The template for a CSV file can be stored in a text file and supplied with the `
 
 The template contains the layout of each line of data, with placeholders for where the dynamic data is inserted. Save it as `template.txt`.
 
-You may now run `datagenerator` using this template:
+You may now run `datamaker` using this template:
 
 ```sh
-$ datagenerator -t ./template.txt -f csv -i 500
+$ datamaker -t ./template.txt -f csv -i 500
 ```
 
 Alternatively, you can pipe in the template from elsewhere:
 
 ```sh
-$ echo "{{uuid}},{{date}},{{firstname}} {{surname}},{{zip}}" | datagenerator --format csv --iterations 10000 
+$ echo "{{uuid}},{{date}},{{firstname}} {{surname}},{{zip}}" | datamaker --format csv --iterations 10000 
 ```
 
 ## Generating JSON data
@@ -94,10 +94,10 @@ JSON data is generated in a similar way. This time our template represents a sin
 
 Save the template as `template.json`.
 
-Run the `datagenerator` as before but with `json` as the format parameter:
+Run the `datamaker` as before but with `json` as the format parameter:
 
 ```sh
-$ datagenerator -t ./template.json -f json -i 500 
+$ datamaker -t ./template.json -f json -i 500 
 {"_id":"G3BX8LUGFHAGFX7A","name":"Chelsea Ballou","dob":"2003-10-10","address":{"street":"0055 Houghton","town":"Tynemouth","postode":"HU0 4GF"},"telephone":"+509-9934-828-292","pets":["Murphy","Nala"],"score":9.5,"email":"nelson_jones@spousy.com","url":"http://propriospinal.com","description":"outmate solarometer Zapara tyro keratinize galactolytic divestiture swardy petaled tearlessness adjutorious epigynum jotation tavernly suggestum Eriophyes straint Tsuma malignation autoscience","verified":true,"salary":32082}
 ...
 ```
@@ -121,21 +121,21 @@ Create an XML template e.g. `template.xml`:
 </company>
 ```
 
-Run the datagenerator as before but with `xml` as the format parameter:
+Run the datamaker as before but with `xml` as the format parameter:
 
 
 ```sh
-$ datagenerator -t ./template.xml -f xml -i 500 
+$ datamaker -t ./template.xml -f xml -i 500 
 <?xml version="1.0"?><company>  <name>Consulting </name>  <address>    <street>5270 Bispham Lane</street>    <city>Saint Louis</city>    <state>Alabama</state>    <zip>AZ83647</zip>  </address>  <ceo>Jefferey Harvey</ceo>  <dateCreated>2009-10-28</dateCreated></company>
 ...
 ```
 
-## Using datagenerator to import data into Cloudant/CouchDB
+## Using datamaker to import data into Cloudant/CouchDB
 
 Combining this tool with the [couchimport](https://www.npmjs.com/package/couchimport) utility allows data to be generated and imported into the a Cloudant/CouchDB database in one go:
 
 ```sh
-$ datagenerator -t ./template.json -f json -i 100 | couchimport --database mydatabase --type jsonl
+$ datamaker -t ./template.json -f json -i 100 | couchimport --database mydatabase --type jsonl
   couchimport Written ok:100 - failed: 0 -  (100) +1s
   couchimport { documents: 100, failed: 0, total: 100, totalfailed: 0 } +0ms
   couchimport writecomplete { total: 100, totalfailed: 0 } +96ms
@@ -151,7 +151,7 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 The code for the tags can be found in the `plugins` folder of the source code.
 
 - A-E - [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
-- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [oneof](#oneof) [normal](#normal)
+- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [oneof](#oneof) [name](#name) [normal](#normal)
 - P-T - [postcode](#postcode) [price](#state) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
 - U-Z - [url](#url) [uuid](#uuid) [website](#website) [word](#) [words](#words) [zip](#zip)
 
@@ -475,6 +475,18 @@ e.g.
 {{oneof Gryffindor Hufflepuff Ravenclaw Slytherin}} ---> Slytherin
 ```
 
+### {{name}}
+
+Combination for firstname and surname. Equivalent of `{{firstname}} {{surname}}`.
+
+Parameters: none
+
+e.g.
+
+```
+{{name}} ---> Anna Flint
+```
+
 ### {{normal}}
 
 Generates numbers on a normal distribution
@@ -725,7 +737,7 @@ e.g.
 You can use this npm module as a library in your own code
 
 ```js
-let dg = require('datagenerator')
+let dg = require('datamaker')
 const template = '{{title}} {{firstname}} {{surname}}'
 const format = 'none'
 const iterations = 500
@@ -750,7 +762,7 @@ The data generated by this tool is biased towards UK and US data sets. The names
 Note that generating an address with `{{street}},{{city}},{{state}},{{statecode}}{{zip}}` will generate that appears at a glance to be a reasonble address, but is patently nonsense:
 
 ```sh
-$ echo "{{street}},{{city}},{{state}},{{statecode}}{{zip}}" | datagenerator
+$ echo "{{street}},{{city}},{{state}},{{statecode}}{{zip}}" | datamaker
 6682 Crowcroft Circle,Nashua,New York,UT00769
 ```
 

@@ -1,5 +1,5 @@
 {
-  "name": "datagenerator",
+  "name": "datamaker",
   "version": "0.1.0",
   "description": "Sample data generator - command-line utility and library",
   "main": "index.js",
@@ -7,11 +7,11 @@
     "standard": "standard --fix"
   },
   "bin": {
-    "datagenerator": "datagenerator.bin.js"
+    "datamaker": "datamaker.bin.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/glynnbird/datagenerator.git"
+    "url": "git+https://github.com/glynnbird/datamaker.git"
   },
   "keywords": [
     "Data",
@@ -24,9 +24,9 @@
   "author": "Glynn Bird <glynn.bird@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/glynnbird/datagenerator/issues"
+    "url": "https://github.com/glynnbird/datamaker/issues"
   },
-  "homepage": "https://github.com/glynnbird/datagenerator#readme",
+  "homepage": "https://github.com/glynnbird/datamaker#readme",
   "dependencies": {
     "async": "^2.6.1",
     "yargs": "^12.0.1"
