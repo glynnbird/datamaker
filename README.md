@@ -20,6 +20,9 @@ DERC4Y2BQ6HCI0HI,1983-08-11,Cathleen Leal,earlenemattson@gmail.com
 00K8FEGZJO31Q08O,2005-06-18,Louie Lee,tonisha.short@hotmail.com
 JDYSVPTAEXKEF9D8,1982-10-29,Dionne Vann,martin.renfro@hemicrane.com
 ```
+
+You can see the *datamaker* library in action at https://glynnbird.github.io/datamakerui/
+
 ## Pre-requisites
 
 [Node.js & npm](https://nodejs.org/en/) are required to be pre-installed. 
