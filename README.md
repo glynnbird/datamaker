@@ -367,7 +367,7 @@ e.g.
 {{email}} ---> jermaine.buchanan@drilling.com
 ```
 
-### {{email}}
+### {{emojii}}
 
 Emojii.
 
