@@ -154,7 +154,7 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 The code for the tags can be found in the `plugins` folder of the source code.
 
 - A-E - [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
-- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [oneof](#oneof) [name](#name) [normal](#normal)
+- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [kuuid](#kuuid) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [oneof](#oneof) [name](#name) [normal](#normal)
 - P-T - [postcode](#postcode) [price](#state) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
 - U-Z - [url](#url) [uuid](#uuid) [website](#website) [word](#) [words](#words) [zip](#zip)
 
@@ -425,6 +425,22 @@ e.g.
 ```
 {{integer}} ---> 99
 {{integer 1000 2000}} ---> 1523
+```
+
+### {{kuuid}}
+
+Time-sortable, unique identifier. see [here](https://www.npmjs.com/package/kuuid)
+
+Parameters: 
+
+- min (optional) - minimum date
+- max (optional) - maximum date
+
+e.g.
+
+```
+{{kuuid}} ---> 001g8LWk0Svk222Bd0Et0GeaBl1P1gkP
+{{kuuid 2010-01-01 2019-01-01}} ---> 001eWhUE2HLix22HqmL5436NDm1p02X6
 ```
 
 ### {{latitude}}
