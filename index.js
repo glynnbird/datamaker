@@ -4,6 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const tagNames = fs.readdirSync(path.join(__dirname, 'plugins')).map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
 const formatterNames = fs.readdirSync(path.join(__dirname, 'formatters')).map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
+const cache = require('./cache.js')
 
 // locate occurences of things surrounded in double curly {{brackets}}
 const findTags = (str) => {
@@ -51,6 +52,9 @@ const swap = (template, tags, formatter) => {
       // calculate the replacement
       const replacement = formatter.filter(code.apply(null, tag.parameters))
 
+      // cache the last-generated value for each tag
+      cache.set(tag.tag, replacement)
+
       // switch the tag in the template for the replacement
       str = str.replace(tag.original, replacement)
     }
@@ -92,6 +96,7 @@ const generate = (str, format, iterations) => {
       return (i < iterations)
     }, () => {
       process.nextTick(() => {
+        cache.clear()
         ee.emit('end', { count: i })
       })
     })
