@@ -11,7 +11,7 @@ var argv = require('yargs')
   .option('format', { alias: 'f', describe: 'Format of output data: json,csv,none', demandOption: false, default: 'none' })
   .option('iterations', { alias: 'i', describe: 'Number of records to generater', demandOption: false, default: 1 })
   .option('template', { alias: 't', describe: 'The path of the template file', demandOption: false })
-  .option('list', { alias: 'l', describe: 'List available tags', demandOption: false, default: false })
+  .option('list', { alias: 'l', boolean: true, describe: 'List available tags', demandOption: false, default: false })
   .help('help')
   .argv
 
