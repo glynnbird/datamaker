@@ -154,7 +154,7 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 The code for the tags can be found in the `plugins` folder of the source code.
 
 - A-E - [airport](#airport) [autoinc](#autoinc) [base64](#base64) [boolean](#boolean) [cat](#cat) [city](#city) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
-- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [oneof](#oneof) [name](#name) [normal](#normal)
+- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [md5](#md5) [name](#name) [normal](#normal) [oneof](#oneof)
 - P-T - [postcode](#postcode) [price](#state) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
 - U-Z - [url](#url) [uuid](#uuid) [website](#website) [word](#) [words](#words) [zip](#zip)
 
@@ -525,6 +525,18 @@ e.g.
 
 ```
 {{longitude}} ---> 175.2526
+```
+
+### {{md5}}
+
+MD5 hash.
+
+Parameters: none
+
+e.g.
+
+```
+{{md5}} ---> 2a103b3f2a01ced91d4e6319999294bb
 ```
 
 ### {{oneof}}
