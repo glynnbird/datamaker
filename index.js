@@ -81,16 +81,18 @@ const generate = (str, format, iterations) => {
   // make "iterations" loops
   let i = 0
   process.nextTick(() => {
-    a.doWhilst((done) => {
-      // swap out placeholders for random values
-      const newStr = swap(str, tags, formatter)
+    a.doWhilst(async (done) => {
+      return new Promise((resolve, reject) => {
+        // swap out placeholders for random values
+        const newStr = swap(str, tags, formatter)
 
-      // emit the data to the caller
-      ee.emit('data', newStr)
+        // emit the data to the caller
+        ee.emit('data', newStr)
 
-      // take a breath
-      process.nextTick(done)
-    }, () => {
+        // take a breath
+        process.nextTick(resolve)
+      })
+    }, async () => {
       i++
       // don't stop til you get enough
       return (i < iterations)
