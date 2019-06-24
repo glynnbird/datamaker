@@ -155,7 +155,7 @@ The code for the tags can be found in the `plugins` folder of the source code.
 
 - A-E - [airport](#airport) [autoinc](#autoinc) [base64](#base64) [boolean](#boolean) [cat](#cat) [city](#city) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
 - F-O - [firstname](#firstname) [float](#float) [integer](#integer) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [md5](#md5) [name](#name) [normal](#normal) [oneof](#oneof)
-- P-T - [password](#password) [postcode](#postcode) [price](#state) [sha1](#sha1) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
+- P-T - [password](#password) [postcode](#postcode) [price](#state) [prime](#prime) [sha1](#sha1) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
 - U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [website](#website) [word](#) [words](#words) [zip](#zip)
 
 ### {{airport}}
@@ -618,6 +618,22 @@ e.g.
 ```
 {{price}} ---> 65.29
 {{price 500 700}} ---> 521.98
+```
+
+### {{prime}}
+
+Prime number. If you supply impossible parameters, you will get _1_ in reply.
+
+Parameters: 
+
+- min (default 1)
+- max (default 100)
+
+e.g.
+
+```
+{{prime}} ---> 17
+{{prime 1000 3000}} ---> 1657
 ```
 
 ### {{sha1}}
