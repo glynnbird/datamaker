@@ -153,10 +153,10 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 
 The code for the tags can be found in the `plugins` folder of the source code.
 
-- A-E - [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
-- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [oneof](#oneof) [name](#name) [normal](#normal)
-- P-T - [postcode](#postcode) [price](#state) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
-- U-Z - [url](#url) [uuid](#uuid) [website](#website) [word](#) [words](#words) [zip](#zip)
+- A-E - [airport](#airport) [autoinc](#autoinc) [base64](#base64) [boolean](#boolean) [cat](#cat) [city](#city) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
+- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [md5](#md5) [name](#name) [normal](#normal) [oneof](#oneof)
+- P-T - [password](#password) [postcode](#postcode) [price](#state) [prime](#prime) [sha1](#sha1) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
+- U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [website](#website) [word](#) [words](#words) [zip](#zip)
 
 ### {{airport}}
 
@@ -181,6 +181,21 @@ e.g.
 ```
 {{autoinc}} ---> 1 
 {{autoinc}} ---> 2 
+```
+
+### {{base64}}
+
+Some base64-encoded data
+
+Parameters: 
+
+- the number of bytes of data to generate (default 5)
+
+e.g.
+
+```
+{{base64}} ---> VkJKTFE=
+{{base64 25}} ---> R0JPS0FaT01UR1FZU0hDVUVKT0NHTllYUg==
 ```
 
 ### {{boolean}}
@@ -512,6 +527,18 @@ e.g.
 {{longitude}} ---> 175.2526
 ```
 
+### {{md5}}
+
+MD5 hash.
+
+Parameters: none
+
+e.g.
+
+```
+{{md5}} ---> 2a103b3f2a01ced91d4e6319999294bb
+```
+
 ### {{oneof}}
 
 Picks one of supplied values.
@@ -553,6 +580,18 @@ e.g.
 {{normal 20000 1000 2}} ---> 20370.88
 ```
 
+### {{password}}
+
+A commonly-used password.
+
+Parameters: none
+
+e.g.
+
+```
+{{password}} ---> abcd1234
+```
+
 ### {{postcode}}
 
 UK postcode.
@@ -579,6 +618,34 @@ e.g.
 ```
 {{price}} ---> 65.29
 {{price 500 700}} ---> 521.98
+```
+
+### {{prime}}
+
+Prime number. If you supply impossible parameters, you will get _1_ in reply.
+
+Parameters: 
+
+- min (default 1)
+- max (default 100)
+
+e.g.
+
+```
+{{prime}} ---> 17
+{{prime 1000 3000}} ---> 1657
+```
+
+### {{sha1}}
+
+SHA1 hash.
+
+Parameters: none
+
+e.g.
+
+```
+{{sha1}} ---> 188f2368d0d7870fb9a822429bdf480f0575a2d9
 ```
 
 ### {{state}}
@@ -704,6 +771,18 @@ e.g.
 
 ```
 {{town}} ---> Dudley
+```
+
+### {{unit}}
+
+An SI Unit
+
+Parameters: none
+
+e.g.
+
+```
+{{unit}} ---> °C
 ```
 
 ### {{url}}
