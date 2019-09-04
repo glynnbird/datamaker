@@ -1,5 +1,4 @@
 const EventEmitter = require('events')
-const a = require('async')
 const fs = require('fs')
 const path = require('path')
 const tagNames = fs.readdirSync(path.join(__dirname, 'plugins')).map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
@@ -81,27 +80,15 @@ const generate = (str, format, iterations) => {
   // make "iterations" loops
   let i = 0
   process.nextTick(() => {
-    a.doWhilst(async (done) => {
-      return new Promise((resolve, reject) => {
-        // swap out placeholders for random values
-        const newStr = swap(str, tags, formatter)
+    do {
+      const newStr = swap(str, tags, formatter)
+      // emit the data to the caller
+      ee.emit('data', newStr)
 
-        // emit the data to the caller
-        ee.emit('data', newStr)
-
-        // take a breath
-        process.nextTick(resolve)
-      })
-    }, async () => {
       i++
-      // don't stop til you get enough
-      return (i < iterations)
-    }, () => {
-      process.nextTick(() => {
-        cache.clear()
-        ee.emit('end', { count: i })
-      })
-    })
+    } while (i < iterations)
+    cache.clear()
+    ee.emit('end', { count: i })
   })
 
   return ee
