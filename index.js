@@ -42,7 +42,7 @@ const swap = (template, tags, formatter) => {
   let str = template
 
   // iterate through the tags
-  for (let i in tags) {
+  for (const i in tags) {
     // load the plugin
     const tag = tags[i]
     if (tagNames.includes(tag.tag)) {

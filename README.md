@@ -153,10 +153,34 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 
 The code for the tags can be found in the `plugins` folder of the source code.
 
-- A-E - [airport](#airport) [autoinc](#autoinc) [base64](#base64) [boolean](#boolean) [cat](#cat) [city](#city) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
-- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [md5](#md5) [name](#name) [normal](#normal) [oneof](#oneof)
-- P-T - [password](#password) [postcode](#postcode) [price](#state) [prime](#prime) [sha1](#sha1) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
-- U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [website](#website) [word](#) [words](#words) [zip](#zip)
+- A-E - [addressuk](#addressuk) [addressus](#addressus) [airport](#airport) [autoinc](#autoinc) [base64](#base64) [boolean](#boolean) [cat](#cat) [city](#city) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
+- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [md5](#md5) [monarch](#monarch) [name](#name) [normal](#normal) [oneof](#oneof)
+- P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [sha1](#sha1) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
+- U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
+
+### {{addressuk}}
+
+Single-line UK address.         
+
+Parameters: none
+
+e.g.
+
+```
+{{addressuk}} ---> 9315 Lancaster Circle, Haslingden, Nottinghamshire, HS15 6YD
+```
+
+### {{addressus}}
+
+Single-line US address.         
+
+Parameters: none
+
+e.g.
+
+```
+{{addressus}} ---> 8184 Ambrose, Fontana, Minnesota, 44626
+```
 
 ### {{airport}}
 
@@ -539,6 +563,18 @@ e.g.
 {{md5}} ---> 2a103b3f2a01ced91d4e6319999294bb
 ```
 
+### {{monarch}}
+
+King or Queen.
+
+Parameters: none
+
+e.g.
+
+```
+{{monarch}} ---> Henry VIII
+```
+
 ### {{oneof}}
 
 Picks one of supplied values.
@@ -584,12 +620,27 @@ e.g.
 
 A commonly-used password.
 
-Parameters: none
+Parameters: 
+
+- hash - one of sha1, sha256, md5 (optional. Default '')
 
 e.g.
 
 ```
 {{password}} ---> abcd1234
+{{password md5}} ---> 1f3870be274f6c49b3e31a0c6728957f
+```
+
+### {{president}}
+
+A US president
+
+Parameters: None
+
+e.g.
+
+```
+{{president}} ---> Richard Nixon
 ```
 
 ### {{postcode}}
@@ -646,6 +697,18 @@ e.g.
 
 ```
 {{sha1}} ---> 188f2368d0d7870fb9a822429bdf480f0575a2d9
+```
+
+### {{sic}}
+
+Industry standard SIC code - business category
+
+Parameters: none
+
+e.g.
+
+```
+{{sic}} ---> Growing of tobacco
 ```
 
 ### {{state}}
@@ -846,6 +909,18 @@ e.g.
 ```
 {{words}} ---> piacularly burp archisymbolical glumaceous Calinago
 {{words 2}} --->Xenomorpha mauler
+```
+
+### {{youtube}}
+
+Random YouTube URL.
+
+Parameters: none
+
+e.g.
+
+```
+{{youtube}} ---> https://www.youtube.com/watch?v=dQw4w9WgXcQ
 ```
 
 ### {{zip}}

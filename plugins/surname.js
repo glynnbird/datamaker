@@ -5002,9 +5002,9 @@ const options = [
 ]
 
 module.exports = () => {
-  let r1 = Math.floor(Math.random() * options.length)
+  const r1 = Math.floor(Math.random() * options.length)
   if (Math.random() > 0.95) {
-    let r2 = Math.floor(Math.random() * options.length)
+    const r2 = Math.floor(Math.random() * options.length)
     return options[r1] + '-' + options[r2]
   }
   return options[r1]
