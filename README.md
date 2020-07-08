@@ -174,6 +174,7 @@ $ echo '{{ name | toLowerCase | sha256 }}' | datamaker
 - `sha1`
 - `sha256`
 - `base64`
+- `toString`
 
 ## Tag reference
 
@@ -226,13 +227,15 @@ e.g.
 
 Auto-incrementing number.          
 
-Parameters: none
+Parameters: 
+
+- starting number (default 1)
 
 e.g.
 
 ```
-{{autoinc}} ---> 1 
-{{autoinc}} ---> 2 
+{{autoinc 1000}} ---> 1000
+{{autoinc}} ---> 1001
 ```
 
 ### {{boolean}}
@@ -411,12 +414,18 @@ e.g.
 
 Email address.
 
-Parameters: none
+Parameters: 
+
+- whether to use the previous firstname/surname for the email generation
 
 e.g.
 
 ```
 {{email}} ---> jermaine.buchanan@drilling.com
+
+# based on previous name
+{{name}} ---> Sheba Arthur
+{{email true}} ---> sheba21436@yes.etnedal.no
 ```
 
 ### {{emojii}}

@@ -87,6 +87,9 @@ const swap = (template, tags, formatter) => {
             case 'base64':
               replacement = Buffer.from(replacement).toString('base64')
               break
+            case 'toString':
+              replacement = replacement.toString()
+              break
             default:
               break
           }
