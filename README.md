@@ -147,6 +147,34 @@ $ datamaker -t ./template.json -f json -i 100 | couchimport --database mydatabas
 
 They key thing here is to use `--type jsonl` which instructs `couchimport` to expect one JSON document per line. The *couchimport* utility bundles the JSON into bulk API calls and posts them to the database via HTTP.
 
+## Filters
+
+A datamaker tag can also include optional filters by supplying strings after a `|` character e.g.
+
+```
+$ echo '{{ name | toUpperCase }}' | datamaker
+JANYCE MOE
+```
+
+Filters can be chained e.g.
+
+```
+$ echo '{{ words 5 | toUpperCase | toArray}}' | datamaker
+["BUDAPEST","LICENSING","GMC","METHODOLOGY","MEM"]
+$ echo '{{ name | toLowerCase | sha256 }}' | datamaker
+76576efc53b4441d342acbca485457f948c1b97c4a2515a05ffc47aa524b5093
+```
+
+### Available filters
+
+- `toUpperCase`
+- `toLowerCase`
+- `toArray`
+- `md5`
+- `sha1`
+- `sha256`
+- `base64`
+
 ## Tag reference
 
 The Mustache-style tags you may use are listed below. Some tags allow extra parameters to be supplied to affect the range of random data generated
@@ -154,8 +182,8 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 The code for the tags can be found in the `plugins` folder of the source code.
 
 - A-E - [addressuk](#addressuk) [addressus](#addressus) [airport](#airport) [autoinc](#autoinc) [base64](#base64) [boolean](#boolean) [cat](#cat) [city](#city) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
-- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [md5](#md5) [monarch](#monarch) [name](#name) [normal](#normal) [oneof](#oneof)
-- P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [sha1](#sha1) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
+- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [oneof](#oneof)
+- P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
 - U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
 
 ### {{addressuk}}
@@ -551,16 +579,16 @@ e.g.
 {{longitude}} ---> 175.2526
 ```
 
-### {{md5}}
+### {{marque}}
 
-MD5 hash.
+Car manufacturer.
 
 Parameters: none
 
 e.g.
 
 ```
-{{md5}} ---> 2a103b3f2a01ced91d4e6319999294bb
+{{marque}} ---> Bugatti
 ```
 
 ### {{monarch}}
@@ -620,15 +648,13 @@ e.g.
 
 A commonly-used password.
 
-Parameters: 
-
-- hash - one of sha1, sha256, md5 (optional. Default '')
+Parameters: none
 
 e.g.
 
 ```
 {{password}} ---> abcd1234
-{{password md5}} ---> 1f3870be274f6c49b3e31a0c6728957f
+{{password | md5}} ---> 1f3870be274f6c49b3e31a0c6728957f
 ```
 
 ### {{president}}
@@ -687,17 +713,6 @@ e.g.
 {{prime 1000 3000}} ---> 1657
 ```
 
-### {{sha1}}
-
-SHA1 hash.
-
-Parameters: none
-
-e.g.
-
-```
-{{sha1}} ---> 188f2368d0d7870fb9a822429bdf480f0575a2d9
-```
 
 ### {{sic}}
 

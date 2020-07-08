@@ -1,4 +1,3 @@
-const crypto = require('crypto')
 const options = [
   '123456',
   'password',
@@ -859,9 +858,5 @@ const options = [
 
 module.exports = (hash) => {
   const r = Math.floor(Math.random() * options.length)
-  const password = options[r]
-  if (hash && ['sha1', 'md5', 'sha256'].includes(hash)) {
-    return crypto.createHash(hash).update(password).digest('hex')
-  }
-  return password
+  return options[r]
 }

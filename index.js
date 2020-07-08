@@ -4,6 +4,7 @@ const path = require('path')
 const tagNames = fs.readdirSync(path.join(__dirname, 'plugins')).map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
 const formatterNames = fs.readdirSync(path.join(__dirname, 'formatters')).map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
 const cache = require('./cache.js')
+const crypto = require('crypto')
 
 // locate occurences of things surrounded in double curly {{brackets}}
 const findTags = (str) => {
@@ -13,6 +14,7 @@ const findTags = (str) => {
 
   if (matches) {
     // iterate through each one
+    let filter = null
     tags = matches.map((s) => {
       // remove leading {{
       // removing trailing }}
@@ -24,11 +26,19 @@ const findTags = (str) => {
         .map((e) => { return e.trim() })
         .filter((e) => { return e.length > 0 })
 
+      // if there's an optional filter e.g. {{ name | toUpperCase }}
+      if (arr.includes('|')) {
+        const i = arr.indexOf('|')
+        const filterArr = arr.splice(i)
+        filter = filterArr.filter((f) => { return f !== '|' })
+      }
+
       // return original text, the tag name and the parameters
       return {
         original: s,
         tag: arr[0],
-        parameters: arr.slice(1)
+        parameters: arr.slice(1),
+        filter: filter
       }
     })
   }
@@ -49,7 +59,39 @@ const swap = (template, tags, formatter) => {
       const code = require(path.join(__dirname, 'plugins', tag.tag))
 
       // calculate the replacement
-      const replacement = formatter.filter(code.apply(null, tag.parameters))
+      let replacement = formatter.filter(code.apply(null, tag.parameters))
+
+      // apply filter
+      if (tag.filter) {
+        for (var j in tag.filter) {
+          const filter = tag.filter[j]
+          switch (filter) {
+            case 'toLowerCase':
+              replacement = replacement.toLowerCase()
+              break
+            case 'toUpperCase':
+              replacement = replacement.toUpperCase()
+              break
+            case 'toArray':
+              replacement = JSON.stringify(replacement.split(/\W/))
+              break
+            case 'md5':
+              replacement = crypto.createHash('md5').update(replacement).digest('hex')
+              break
+            case 'sha1':
+              replacement = crypto.createHash('sha1').update(replacement).digest('hex')
+              break
+            case 'sha256':
+              replacement = crypto.createHash('sha256').update(replacement).digest('hex')
+              break
+            case 'base64':
+              replacement = Buffer.from(replacement).toString('base64')
+              break
+            default:
+              break
+          }
+        }
+      }
 
       // cache the last-generated value for each tag
       cache.set(tag.tag, replacement)
