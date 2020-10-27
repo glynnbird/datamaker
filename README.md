@@ -182,10 +182,10 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 
 The code for the tags can be found in the `plugins` folder of the source code.
 
-- A-E - [addressuk](#addressuk) [addressus](#addressus) [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
+- A-E - [addressuk](#addressuk) [addressus](#addressus) [addressgerman](#addressgerman) [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [cityGerman](#cityGerman) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
 - F-O - [firstname](#firstname) [float](#float) [integer](#integer) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [oneof](#oneof)
-- P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
-- U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
+- P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [streetGerman](#streetGerman) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
+- U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [uuidv4](#uuidv4) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
 
 ### {{addressuk}}
 
@@ -209,6 +209,18 @@ e.g.
 
 ```
 {{addressus}} ---> 8184 Ambrose, Fontana, Minnesota, 44626
+```
+
+### {{addressgerman}}
+
+Single-line German address.         
+
+Parameters: none
+
+e.g.
+
+```
+{{addressgerman}} ---> Bahnhofsstrasse 12, 80335 München
 ```
 
 ### {{airport}}
@@ -275,6 +287,18 @@ e.g.
 
 ```
 {{city}} ---> Fremont
+```
+
+### {{cityGerman}}
+
+German city name.
+
+Parameters: none
+
+e.g.
+
+```
+{{cityGerman}} ---> Berlin
 ```
 
 ### {{company}}
@@ -756,6 +780,18 @@ e.g.
 {{street}} ---> 6502 Chantler Avenue
 ```
 
+### {{streetGerman}}
+
+German Street name.
+
+Parameters: none
+
+e.g.
+
+```
+{{streetGerman}} ---> Schulstrasse
+```
+
 ### {{surname}}
 
 Human surname.
@@ -879,6 +915,18 @@ e.g.
 
 ```
 {{uuid}} ---> C3QTU8YIVKZY126Q
+```
+
+### {{uuidv4}}
+
+Unique identifier v4.
+
+Parameters: none
+
+e.g.
+
+```
+{{uuidv4}} ---> d1e606b0-0452-46a7-9190-8671a82fdea0
 ```
 
 ### {{website}}
