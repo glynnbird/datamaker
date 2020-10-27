@@ -112,11 +112,11 @@ Only in JSON-Templates you may use the loop-command to create an Array of data.
 
 Usage:  
 ```json
-"((loop property number))":{}
+"((loop property number[,max]))":{}
 ```
 
 - property will be the name of the array
-- number is the number of times to repeat the object into the resulting array.
+- number is the number of times to repeat the object into the resulting array. if used with a second number, a random number between these two will be used, eg. `"((loop tags 2,9))": "{{word}}"`
 
 Example:  
 ```json

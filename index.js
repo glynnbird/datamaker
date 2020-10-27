@@ -159,10 +159,18 @@ const iterateLoop = (obj) => {
     if (key.startsWith('((loop ')) {
       const splitter = key.split(' ')
       const tagname = splitter[1].trim()
-      const times = parseInt(splitter[2].split('))')[0].trim())
+      const times = splitter[2].split('))')[0].trim()
+      let repeat
+      if (times.includes(',')) {
+        const min = parseInt(times.split(',')[0])
+        const max = parseInt(times.split(',')[1])
+        repeat = Math.floor(Math.random() * (max - min)) + min
+      } else {
+        repeat = parseInt(times)
+      }
       const template = obj[key]
       obj[tagname] = []
-      for (let index = 0; index < times; index++) {
+      for (let index = 0; index < repeat; index++) {
         obj[tagname].push(template)
       }
       delete obj[key]
