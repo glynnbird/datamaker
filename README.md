@@ -86,12 +86,13 @@ JSON data is generated in a similar way. This time our template represents a sin
   },
   "telephone": "{{tel}}",
   "pets": ["{{cat}}","{{dog}}"],
+  "((loop children 4))":"{{firstname}}"
   "score": {{float 1 10 1}},
   "email": "{{email}}",
   "url": "{{website}}",
   "description": "{{words 20}}",
   "verified": {{boolean 0.75}},
-  "salary": {{float 10000 70000 0}}
+  "salary": {{float 10000 70000 0}},
 }
 ```
 
@@ -101,8 +102,48 @@ Run the `datamaker` as before but with `json` as the format parameter:
 
 ```sh
 $ datamaker -t ./template.json -f json -i 500 
-{"_id":"G3BX8LUGFHAGFX7A","name":"Chelsea Ballou","dob":"2003-10-10","address":{"street":"0055 Houghton","town":"Tynemouth","postode":"HU0 4GF"},"telephone":"+509-9934-828-292","pets":["Murphy","Nala"],"score":9.5,"email":"nelson_jones@spousy.com","url":"http://propriospinal.com","description":"outmate solarometer Zapara tyro keratinize galactolytic divestiture swardy petaled tearlessness adjutorious epigynum jotation tavernly suggestum Eriophyes straint Tsuma malignation autoscience","verified":true,"salary":32082}
+{"_id":"G3BX8LUGFHAGFX7A","name":"Chelsea Ballou","dob":"2003-10-10","address":{"street":"0055 Houghton","town":"Tynemouth","postode":"HU0 4GF"},"telephone":"+509-9934-828-292","pets":["Murphy","Nala"],"children":["John","Anne", "Tracy","Amelie"],"score":9.5,"email":"nelson_jones@spousy.com","url":"http://propriospinal.com","description":"outmate solarometer Zapara tyro keratinize galactolytic divestiture swardy petaled tearlessness adjutorious epigynum jotation tavernly suggestum Eriophyes straint Tsuma malignation autoscience","verified":true,"salary":32082}
 ...
+```
+
+### Loops
+
+Only in JSON-Templates you may use the loop-command to create an Array of data.
+
+Usage:  
+```json
+"((loop property number))":{}
+```
+
+- property will be the name of the array
+- number is the number of times to repeat the object into the resulting array.
+
+Example:  
+```json
+{
+  "((loop items 2))": {
+    "name":"{{word}}",
+    "price":"{{price}}"
+  }
+}
+```
+
+results in
+
+```json
+
+{
+  "items": [
+    {
+      "name":"some",
+      "price":"2.50"
+    },
+    {
+      "name":"item",
+      "price":"4.30"
+    }
+  ]
+}
 ```
 
 ## Generating XML data
