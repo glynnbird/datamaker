@@ -113,6 +113,16 @@ const swap = (template, tags, formatter) => {
 const generate = (str, format, iterations) => {
   const ee = new EventEmitter()
 
+  if (format === 'json') {
+    try {
+      const loopJSON = JSON.parse(str)
+      iterateLoop(loopJSON)
+      str = JSON.stringify(loopJSON)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   // locate tags in the template
   const tags = findTags(str)
 
@@ -129,7 +139,7 @@ const generate = (str, format, iterations) => {
       const newStr = swap(str, tags, formatter)
       // emit the data to the caller
       ee.emit('data', newStr)
-
+      // TODO: here will be the saving to a file
       i++
     } while (i < iterations)
     cache.clear()
@@ -142,6 +152,35 @@ const generate = (str, format, iterations) => {
 // list possible tag names
 const listTags = () => {
   return tagNames
+}
+
+const iterateLoop = (obj) => {
+  Object.keys(obj).forEach(key => {
+    if (key.startsWith('((loop ')) {
+      const splitter = key.split(' ')
+      const tagname = splitter[1].trim()
+      const times = splitter[2].split('))')[0].trim()
+      let repeat
+      if (times.includes(',')) {
+        const min = parseInt(times.split(',')[0])
+        const max = parseInt(times.split(',')[1])
+        repeat = Math.floor(Math.random() * (max - min)) + min
+      } else {
+        repeat = parseInt(times)
+      }
+      const template = obj[key]
+      obj[tagname] = []
+      for (let index = 0; index < repeat; index++) {
+        obj[tagname].push(template)
+      }
+      delete obj[key]
+      // resolve
+    }
+    if (typeof obj[key] === 'object') {
+      iterateLoop(obj[key])
+    }
+  })
+  return obj
 }
 
 module.exports = {

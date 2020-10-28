@@ -86,12 +86,13 @@ JSON data is generated in a similar way. This time our template represents a sin
   },
   "telephone": "{{tel}}",
   "pets": ["{{cat}}","{{dog}}"],
+  "((loop children 4))":"{{firstname}}"
   "score": {{float 1 10 1}},
   "email": "{{email}}",
   "url": "{{website}}",
   "description": "{{words 20}}",
   "verified": {{boolean 0.75}},
-  "salary": {{float 10000 70000 0}}
+  "salary": {{float 10000 70000 0}},
 }
 ```
 
@@ -101,8 +102,48 @@ Run the `datamaker` as before but with `json` as the format parameter:
 
 ```sh
 $ datamaker -t ./template.json -f json -i 500 
-{"_id":"G3BX8LUGFHAGFX7A","name":"Chelsea Ballou","dob":"2003-10-10","address":{"street":"0055 Houghton","town":"Tynemouth","postode":"HU0 4GF"},"telephone":"+509-9934-828-292","pets":["Murphy","Nala"],"score":9.5,"email":"nelson_jones@spousy.com","url":"http://propriospinal.com","description":"outmate solarometer Zapara tyro keratinize galactolytic divestiture swardy petaled tearlessness adjutorious epigynum jotation tavernly suggestum Eriophyes straint Tsuma malignation autoscience","verified":true,"salary":32082}
+{"_id":"G3BX8LUGFHAGFX7A","name":"Chelsea Ballou","dob":"2003-10-10","address":{"street":"0055 Houghton","town":"Tynemouth","postode":"HU0 4GF"},"telephone":"+509-9934-828-292","pets":["Murphy","Nala"],"children":["John","Anne", "Tracy","Amelie"],"score":9.5,"email":"nelson_jones@spousy.com","url":"http://propriospinal.com","description":"outmate solarometer Zapara tyro keratinize galactolytic divestiture swardy petaled tearlessness adjutorious epigynum jotation tavernly suggestum Eriophyes straint Tsuma malignation autoscience","verified":true,"salary":32082}
 ...
+```
+
+### Loops
+
+Only in JSON-Templates you may use the loop-command to create an Array of data.
+
+Usage:  
+```json
+"((loop property number[,max]))":{}
+```
+
+- property will be the name of the array
+- number is the number of times to repeat the object into the resulting array. if used with a second number, a random number between these two will be used, eg. `"((loop tags 2,9))": "{{word}}"`
+
+Example:  
+```json
+{
+  "((loop items 2))": {
+    "name":"{{word}}",
+    "price":"{{price}}"
+  }
+}
+```
+
+results in
+
+```json
+
+{
+  "items": [
+    {
+      "name":"some",
+      "price":"2.50"
+    },
+    {
+      "name":"item",
+      "price":"4.30"
+    }
+  ]
+}
 ```
 
 ## Generating XML data
@@ -183,7 +224,7 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 The code for the tags can be found in the `plugins` folder of the source code.
 
 - A-E - [addressuk](#addressuk) [addressus](#addressus) [addressgerman](#addressgerman) [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [cityGerman](#cityGerman) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
-- F-O - [firstname](#firstname) [float](#float) [integer](#integer) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [oneof](#oneof)
+- F-O - [file](#file) [firstname](#firstname) [float](#float) [integer](#integer) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [oneof](#oneof)
 - P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [streetGerman](#streetGerman) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
 - U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [uuidv4](#uuidv4) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
 
@@ -465,6 +506,26 @@ e.g.
 ```
 {{emojii}} ---> 👦
 {{emojii 3}} ---> 🌹⛔💺
+```
+
+### {{file}}
+
+Get a random line from a simple text-file, e.g.
+
+```
+line1
+another line
+yeah
+```
+
+Parameters:
+
+- filename - full path to the file (no default)
+
+e.g.
+
+```
+{{file /path/to/file.txt}} ---> line1
 ```
 
 ### {{firstname}}
