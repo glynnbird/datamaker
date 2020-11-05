@@ -48,6 +48,10 @@ $ npm install --save datamaker
 - `--pretty`/`-p` - Pretty Print the output. only avaible for `json`. Default: `false`
 - `--iterations`/`-i` - the number of records to create. Default `1` e.g. `--iterations 5000`
 - `--list`/`-l` - list the available tags
+- `--save`/`-s` - Save the Files to disk (JSON and XML only). Default: `false``
+- `--directory`/`-d` - Folder to write the files to. Defaults to ''
+- `--name`/`-n` - Filename Template to save. `{i}` is a counter, with format `json` you may use `{json:PROPERTY}` to use a property as filename. Defaults to `output-{i}`
+
 
 ## Generating CSV files
 

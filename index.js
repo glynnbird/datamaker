@@ -139,7 +139,6 @@ const generate = (str, format, iterations) => {
       const newStr = swap(str, tags, formatter)
       // emit the data to the caller
       ee.emit('data', newStr)
-      // TODO: here will be the saving to a file
       i++
     } while (i < iterations)
     cache.clear()
