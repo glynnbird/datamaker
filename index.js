@@ -119,7 +119,6 @@ const generate = (str, format, iterations) => {
       iterateLoop(loopJSON)
       str = JSON.stringify(loopJSON)
     } catch (error) {
-      console.error(error)
     }
   }
 
