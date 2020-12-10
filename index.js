@@ -63,7 +63,7 @@ const swap = (template, tags, formatter) => {
 
       // apply filter
       if (tag.filter) {
-        for (var j in tag.filter) {
+        for (const j in tag.filter) {
           const filter = tag.filter[j]
           switch (filter) {
             case 'toLowerCase':

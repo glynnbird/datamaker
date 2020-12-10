@@ -7,7 +7,7 @@ const piped = (!process.stdin.isTTY)
 let rs = null
 
 // get command-line arguements
-var argv = require('yargs')
+const argv = require('yargs')
   .option('format', { alias: ['f', 'type'], describe: 'Format of output data: json,csv,none', demandOption: false, default: 'none' })
   .option('iterations', { alias: 'i', describe: 'Number of records to generater', demandOption: false, default: 1 })
   .option('template', { alias: 't', describe: 'The path of the template file', demandOption: false })
@@ -21,7 +21,7 @@ if (argv.list) {
 }
 
 // die with error code
-var die = function (msg, errCode) {
+const die = function (msg, errCode) {
   console.error('ERROR:' + msg)
   process.exit(errCode)
 }
