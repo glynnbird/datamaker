@@ -224,7 +224,7 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 The code for the tags can be found in the `plugins` folder of the source code.
 
 - A-E - [addressuk](#addressuk) [addressus](#addressus) [addressgerman](#addressgerman) [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [cityGerman](#cityGerman) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
-- F-O - [file](#file) [firstname](#firstname) [float](#float) [integer](#integer) [ip](#ip) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [mac](#mac) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [oneof](#oneof)
+- F-O - [file](#file) [firstname](#firstname) [float](#float) [integer](#integer) [ip](#ip) [ip6](#ip6) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [mac](#mac) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [oneof](#oneof)
 - P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [streetGerman](#streetGerman) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
 - U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [uuidv4](#uuidv4) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
 
@@ -575,7 +575,7 @@ e.g.
 
 ### {{ip}}
 
-IP address.
+IP4 address.
 
 Parameters: 
 
@@ -586,6 +586,21 @@ e.g.
 ```
 {{ip}} ---> 63.235.50.110
 {{ip true}} ---> 192.168.1.58
+```
+
+### {{ip6}}
+
+IP6 address.
+
+Parameters: 
+
+- local - boolean (whether to generate an IP in the fc00::: range or not)
+
+e.g.
+
+```
+{{ip6}} ---> 487d:375d:7bfe:b23b:d1e2:8934:cfb2:c17e
+{{ip true}} ---> fc00:cefe:5dfc:14da:691d:b4bf:63ac:6d17
 ```
 
 ### {{kuuid}}
