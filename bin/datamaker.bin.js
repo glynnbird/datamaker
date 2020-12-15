@@ -9,7 +9,8 @@ let rs = null
 // get command-line arguements
 const argv = require('yargs')
   .option('format', { alias: ['f', 'type'], describe: 'Format of output data: json,csv,none', demandOption: false, default: 'none' })
-  .option('iterations', { alias: 'i', describe: 'Number of records to generater', demandOption: false, default: 1 })
+  .option('pretty', { alias: 'p', boolean: true, describe: 'Pretty-Print JSON-Files', demandOption: false, default: false })
+  .option('iterations', { alias: 'i', describe: 'Number of records to generate', demandOption: false, default: 1 })
   .option('template', { alias: 't', describe: 'The path of the template file', demandOption: false })
   .option('list', { alias: 'l', boolean: true, describe: 'List available tags', demandOption: false, default: false })
   .help('help')
@@ -51,7 +52,13 @@ rs.on('readable', () => {
 }).on('end', () => {
   // when the template has loaded, generate the data
   datagen.generate(template, argv.format, argv.iterations)
-    .on('data', (d) => { console.log(d) })
+    .on('data', (d) => {
+      if (argv.format === 'json' && argv.pretty) {
+        console.log(JSON.stringify(JSON.parse(d), null, 2))
+      } else {
+        console.log(d)
+      }
+    })
     .on('end', (d) => { })
 }).on('error', (e) => {
   die(e, 2)
