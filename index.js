@@ -14,8 +14,8 @@ const findTags = (str) => {
 
   if (matches) {
     // iterate through each one
-    let filter = null
     tags = matches.map((s) => {
+      let filter = null
       // remove leading {{
       // removing trailing }}
       // split into words
