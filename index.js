@@ -72,6 +72,13 @@ const swap = (template, tags, formatter) => {
             case 'toUpperCase':
               replacement = replacement.toUpperCase()
               break
+            case 'toTitleCase':
+              replacement = replacement.toLowerCase()
+              if (replacement.length > 0) {
+                const uc = replacement[0].toUpperCase()
+                replacement = replacement.replace(new RegExp('^' + replacement[0]), uc)
+              }
+              break
             case 'toArray':
               replacement = JSON.stringify(replacement.split(/\W/))
               break
