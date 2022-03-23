@@ -1,10 +1,44 @@
 const EventEmitter = require('events')
 const fs = require('fs')
 const path = require('path')
-const tagNames = fs.readdirSync(path.join(__dirname, 'plugins')).map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
 const formatterNames = fs.readdirSync(path.join(__dirname, 'formatters')).map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
 const cache = require('./cache.js')
 const crypto = require('crypto')
+
+const scanForPlugins = (dirPath, arrayOfPlugins = [], namespace) => {
+  // checks if the directory exists before trying to scan it
+  if (fs.existsSync(dirPath)) {
+    // lists and then iterates over all the files / directories
+    fs.readdirSync(dirPath).forEach((file) => {
+      // if a directory has been detected it is a custom plugin namespace
+      if (fs.statSync(`${dirPath}/${file}`).isDirectory()) {
+        // step into the directory to pick up the custom plugins using "file" as the namespace
+        arrayOfPlugins = scanForPlugins(`${dirPath}/${file}`, arrayOfPlugins, file)
+      } else {
+        const plugin = file.replace(/\.js$/, '')
+        // if it is a custom namespace it will have a namespace which forms part of the tag name
+        const tagName = namespace ? `${namespace}:${plugin}` : plugin
+
+        arrayOfPlugins.push(`{{${tagName}}}`)
+      }
+    })
+  }
+
+  return arrayOfPlugins
+}
+
+const getPlugins = () => {
+  // pick up all the core bundled plugins
+  const bundledPlugins = scanForPlugins(path.join(__dirname, 'plugins'))
+
+  // check for custom plugins that may exist in the root of users applications
+  const customPlugins = scanForPlugins(path.join(process.cwd(), 'datamaker', 'plugins'))
+
+  // combine the bundled and custom plugins together with the custom plugins added last
+  return [...bundledPlugins.sort(), ...customPlugins.sort()]
+}
+
+const tagNames = getPlugins().join('\n')
 
 // locate occurences of things surrounded in double curly {{brackets}}
 const findTags = (str) => {
@@ -56,7 +90,12 @@ const swap = (template, tags, formatter) => {
     // load the plugin
     const tag = tags[i]
     if (tagNames.includes(tag.tag)) {
-      const code = require(path.join(__dirname, 'plugins', tag.tag))
+      // check if it is a custom tag contains and require the plugins from 
+      // the applications custom plugin directory otherwise it is a bundled
+      // plugin and require it as normal
+      const code = tag.tag.includes(':')
+        ? require(path.join(process.cwd(), 'datamaker', 'plugins', tag.tag.split(':')[0], tag.tag.split(':')[1]))
+        : require(path.join(__dirname, 'plugins', tag.tag))
 
       // calculate the replacement
       let replacement = formatter.filter(code.apply(null, tag.parameters))
