@@ -1137,11 +1137,11 @@ datamaker
 With the custom `employeeid` plugin defined as follows:
 
 ```js
-const integer = require("datamaker/plugins/integer");
-
 module.exports = () => {
-  return integer(1000000, 3000000);
-};
+  const min = 1000000
+  const max = 3000000
+  return (Math.floor(min + Math.random() * (max - min))).toString()
+}
 ```
 
 The custom plugin can then be referenced in a template using `{{myorg:employeeid}}` as follows:
