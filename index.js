@@ -82,7 +82,7 @@ const findTags = (str) => {
 // using the supplied template and list of tag objects found within it
 // and a the supplied formatter object, make all the substitions and
 // return the new string
-const swap = (template, tags, formatter) => {
+const swap = async (template, tags, formatter) => {
   let str = template
 
   // iterate through the tags
@@ -93,9 +93,11 @@ const swap = (template, tags, formatter) => {
       // check if it is a custom tag contains and require the plugins from 
       // the applications custom plugin directory otherwise it is a bundled
       // plugin and require it as normal
-      const code = tag.tag.includes(':')
-        ? require(path.join(process.cwd(), 'datamaker', 'plugins', tag.tag.split(':')[0], tag.tag.split(':')[1]))
-        : require(path.join(__dirname, 'plugins', tag.tag))
+      const mod = tag.tag.includes(':')
+        ? import(path.join(process.cwd(), 'datamaker', 'plugins', tag.tag.split(':')[0], `${tag.tag.split(':')[1]}.js`))
+        : import(path.join(__dirname, 'plugins', `${tag.tag}.js`))
+
+      const { default: code } = await mod;
 
       // calculate the replacement
       let replacement = formatter.filter(code.apply(null, tag.parameters))
@@ -179,9 +181,9 @@ const generate = (str, format, iterations) => {
 
   // make "iterations" loops
   let i = 0
-  process.nextTick(() => {
+  process.nextTick(async () => {
     do {
-      const newStr = swap(str, tags, formatter)
+      const newStr = await swap(str, tags, formatter)
       // emit the data to the caller
       ee.emit('data', newStr)
       // TODO: here will be the saving to a file
