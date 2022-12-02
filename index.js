@@ -72,7 +72,7 @@ const findTags = (str) => {
         original: s,
         tag: arr[0],
         parameters: arr.slice(1),
-        filter: filter
+        filter
       }
     })
   }
@@ -90,14 +90,14 @@ const swap = async (template, tags, formatter) => {
     // load the plugin
     const tag = tags[i]
     if (tagNames.includes(tag.tag)) {
-      // check if it is a custom tag contains and require the plugins from 
+      // check if it is a custom tag contains and require the plugins from
       // the applications custom plugin directory otherwise it is a bundled
       // plugin and require it as normal
       const mod = tag.tag.includes(':')
         ? import(path.join(process.cwd(), 'datamaker', 'plugins', tag.tag.split(':')[0], `${tag.tag.split(':')[1]}.js`))
         : import(path.join(__dirname, 'plugins', `${tag.tag}.js`))
 
-      const { default: code } = await mod;
+      const { default: code } = await mod
 
       // calculate the replacement
       let replacement = formatter.filter(code.apply(null, tag.parameters))
@@ -231,6 +231,6 @@ const iterateLoop = (obj) => {
 }
 
 module.exports = {
-  generate: generate,
-  listTags: listTags
+  generate,
+  listTags
 }

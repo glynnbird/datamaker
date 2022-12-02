@@ -13,7 +13,7 @@ const clear = () => {
 }
 
 module.exports = {
-  get: get,
-  set: set,
-  clear: clear
+  get,
+  set,
+  clear
 }

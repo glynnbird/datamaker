@@ -11,6 +11,6 @@ const postCommit = function (str) {
 }
 
 module.exports = {
-  filter: filter,
-  postCommit: postCommit
+  filter,
+  postCommit
 }
