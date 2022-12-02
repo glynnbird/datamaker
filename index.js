@@ -100,7 +100,7 @@ const swap = async (template, tags, formatter) => {
       const { default: code } = await mod
 
       // calculate the replacement
-      let replacement = formatter.filter(code.apply(null, tag.parameters))
+      let replacement = formatter.filter(await code.apply(null, tag.parameters))
 
       // apply filter
       if (tag.filter) {
