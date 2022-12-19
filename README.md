@@ -223,8 +223,8 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 
 The code for the tags can be found in the `plugins` folder of the source code.
 
-- A-E - [addressuk](#addressuk) [addressus](#addressus) [addressgerman](#addressgerman) [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [cityGerman](#cityGerman) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii)
-- F-O - [file](#file) [firstname](#firstname) [float](#float) [integer](#integer) [ip](#ip) [ip6](#ip6) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [mac](#mac) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [oneof](#oneof)
+- A-E - [addressuk](#addressuk) [addressus](#addressus) [addressgerman](#addressgerman) [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [cityGerman](#cityGerman) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii) [ethnicity](#ethnicity)
+- F-O - [file](#file) [firstname](#firstname) [float](#float) [integer](#integer) [ip](#ip) [ip6](#ip6) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [mac](#mac) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [occupation](#occupation) [oneof](#oneof)
 - P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [product](#product) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [streetGerman](#streetGerman) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
 - U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [uuidv4](#uuidv4) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
 
@@ -508,6 +508,18 @@ e.g.
 {{emojii 3}} ---> 🌹⛔💺
 ```
 
+### {{ethnicity}}
+
+Ethnicity string.
+
+Parameters: None
+
+e.g.
+
+```
+{{ethnicity}} ---> Tuscan
+```
+
 ### {{file}}
 
 Get a random line from a simple text-file, e.g.
@@ -722,6 +734,18 @@ e.g.
 
 ```
 {{monarch}} ---> Henry VIII
+```
+
+### {{occupation}}
+
+Occupation string.
+
+Parameters: none
+
+e.g.
+
+```
+{{occupation}} ---> Midwife
 ```
 
 ### {{oneof}}
