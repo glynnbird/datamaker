@@ -102,7 +102,7 @@ const swap = async (template, tags, formatter) => {
       // calculate the replacement
       let replacement = formatter.filter(await code.apply(null, tag.parameters))
 
-      let original = tag.original;
+      let original = tag.original
 
       // apply filter
       if (tag.filter) {
@@ -139,15 +139,15 @@ const swap = async (template, tags, formatter) => {
               break
             case 'toBool':
               replacement = replacement === 'true'
-              original = `"${tag.original}"`;
+              original = `"${tag.original}"`
               break
             case 'toFloat':
-              replacement = parseFloat(replacement);
-              original = `"${tag.original}"`;
+              replacement = parseFloat(replacement)
+              original = `"${tag.original}"`
               break
             case 'toInt':
-              replacement = parseInt(replacement);
-              original = `"${tag.original}"`;
+              replacement = parseInt(replacement)
+              original = `"${tag.original}"`
               break
             case 'toString':
               replacement = replacement.toString()
