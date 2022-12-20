@@ -102,6 +102,8 @@ const swap = async (template, tags, formatter) => {
       // calculate the replacement
       let replacement = formatter.filter(await code.apply(null, tag.parameters))
 
+      let original = tag.original;
+
       // apply filter
       if (tag.filter) {
         for (const j in tag.filter) {
@@ -135,6 +137,18 @@ const swap = async (template, tags, formatter) => {
             case 'base64':
               replacement = Buffer.from(replacement).toString('base64')
               break
+            case 'toBool':
+              replacement = replacement === 'true'
+              original = `"${tag.original}"`;
+              break
+            case 'toFloat':
+              replacement = parseFloat(replacement);
+              original = `"${tag.original}"`;
+              break
+            case 'toInt':
+              replacement = parseInt(replacement);
+              original = `"${tag.original}"`;
+              break
             case 'toString':
               replacement = replacement.toString()
               break
@@ -148,7 +162,7 @@ const swap = async (template, tags, formatter) => {
       cache.set(tag.tag, replacement)
 
       // switch the tag in the template for the replacement
-      str = str.replace(tag.original, replacement)
+      str = str.replace(original, replacement)
     }
   }
 

@@ -215,6 +215,8 @@ $ echo '{{ name | toLowerCase | sha256 }}' | datamaker
 - `sha1`
 - `sha256`
 - `base64`
+- `toFloat`
+- `toInt`
 - `toString`
 
 ## Tag reference
