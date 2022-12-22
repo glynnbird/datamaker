@@ -149,6 +149,9 @@ const swap = async (template, tags, formatter) => {
               replacement = parseInt(replacement)
               original = `"${tag.original}"`
               break
+            case 'toObject':
+              original = `"${tag.original}"`
+              break
             case 'toString':
               replacement = replacement.toString()
               break

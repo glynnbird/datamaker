@@ -215,9 +215,40 @@ $ echo '{{ name | toLowerCase | sha256 }}' | datamaker
 - `sha1`
 - `sha256`
 - `base64`
+- `toString`
+
+Additionally for JSON formats, the following filters can be used within
+templates to output appropriate JSON datatypes:-
+
+- `toBool`
 - `toFloat`
 - `toInt`
-- `toString`
+- `toObject`
+
+E.g. 
+
+```json
+{
+  "alive": "{{boolean 0.75 | toBool}}",
+  "count": "{{integer | toInt}}",
+  "score": "{{float | toFloat}}",
+  "address": "{{custom:plugin | toObject}}",
+}
+```
+
+Returns:-
+
+```json
+{
+  "alive": true,
+  "count": 10,
+  "score": 5.0,
+  "address": {
+    "street": "High Street",
+    "postcode": "PA2 0DL"
+  }
+}
+```
 
 ## Tag reference
 
