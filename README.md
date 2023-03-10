@@ -258,7 +258,7 @@ The code for the tags can be found in the `plugins` folder of the source code.
 
 - A-E - [addressuk](#addressuk) [addressus](#addressus) [addressgerman](#addressgerman) [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [cityGerman](#cityGerman) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii) [ethnicity](#ethnicity)
 - F-O - [file](#file) [firstname](#firstname) [float](#float) [integer](#integer) [ip](#ip) [ip6](#ip6) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [mac](#mac) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [occupation](#occupation) [oneof](#oneof)
-- P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [product](#product) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [streetGerman](#streetGerman) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
+- P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [product](#product) [religion](#religion) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [streetGerman](#streetGerman) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
 - U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [uuidv4](#uuidv4) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
 
 ### {{addressuk}}
@@ -904,6 +904,18 @@ e.g.
 ```
 {{product}} ---> CARABAO
 {{product | toTitleCase}} ---> Salt
+```
+
+### {{religion}}
+
+Religion
+
+Parameters: none
+
+e.g.
+
+```
+{{religion}} ---> Mandaean Nasaraean Sabeans
 ```
 
 ### {{sic}}
