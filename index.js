@@ -173,6 +173,12 @@ const swap = async (template, tags, formatter) => {
   return formatter.postCommit(str)
 }
 
+const sleep = async () => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(resolve)
+  })
+}
+
 // generate some data based on the template, the format and the
 // numer of iterations
 const generate = (str, format, iterations) => {
@@ -205,6 +211,8 @@ const generate = (str, format, iterations) => {
       ee.emit('data', newStr)
       // TODO: here will be the saving to a file
       i++
+      // don't block the node event loop
+      await sleep()
     } while (i < iterations)
     cache.clear()
     ee.emit('end', { count: i })
