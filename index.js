@@ -175,7 +175,7 @@ const swap = async (template, tags, formatter) => {
 
 const sleep = async () => {
   return new Promise((resolve, reject) => {
-    process.nextTick(resolve)
+    setImmediate(resolve)
   })
 }
 
