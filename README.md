@@ -441,7 +441,7 @@ Random date in YYYY-MM-DD format.
 
 Parameters: 
 
-- min - minimum date (default '1970-01-01')
+- min - minimum date or 'now' if the timestamp is to be the current date (default '1970-01-01')
 - max - maximum date (default 'now')
 
 e.g.
@@ -450,6 +450,7 @@ e.g.
 {{date}} ---> 1977-02-28
 {{date 2015-01-01}} ---> 2018-08-02 // date after 2015-01-01
 {{date 2015-01-01 2016-01-01}} ---> 2015-04-23 // date in 2015
+{{date now}} ---> 2024-07-02 // the current date
 ```
 
 ### {{date_iso}}
@@ -458,7 +459,7 @@ Random date in ISO-8601 format.
 
 Parameters: 
 
-- min - minimum date (default '1970-01-01')
+- min - minimum date or 'now' if the timestamp is to be the current date/time (default '1970-01-01')
 - max - maximum date (default 'now')
 
 e.g.
@@ -467,6 +468,7 @@ e.g.
 {{date_iso}} ---> 2013-05-24T02:44:04.687Z
 {{date_iso 2015-01-01}} ---> 2018-07-09T22:15:30.512Z // date after 2015-01-01
 {{date_iso 2015-01-01 2016-01-01}} ---> 2015-04-21T18:08:33.979Z // date in 2015
+{{date_iso now}} ---> 2024-07-02T10:55:52.002Z // the current date
 ```
 
 ### {{digits}}
