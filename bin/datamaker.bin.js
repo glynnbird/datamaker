@@ -1,23 +1,91 @@
 #!/usr/bin/env node
 
+const syntax =
+`Syntax:
+--format/--type/-f       Format of output data: json,csv,none   [default: "none"]
+--iterations/-i          Number of records to generater              [default: 1]
+--template/-t            The path of the template file
+--list/-l                List available tags           [boolean] [default: false]
+--version/-v             Show app version                        [default: false]
+--help/-h                Show app help                           [default: false]
+`
+const app = require('../package.json')
+const { parseArgs } = require('node:util')
+const argv = process.argv.slice(2)
+const options = {
+  format: {
+    type: 'string',
+    short: 'f',
+    default: 'none'
+  },
+  type: {
+    type: 'string'
+  },
+  iterations: {
+    type: 'string',
+    short: 'i',
+    default: '1'
+  },
+  template: {
+    type: 'string',
+    short: 't'
+  },
+  list: {
+    type: 'boolean',
+    short: 'l',
+    default: false
+  },
+  version: {
+    type: 'boolean',
+    short: 'v',
+    default: false
+  },
+  help: {
+    type: 'boolean',
+    short: 'h',
+    default: false
+  }
+}
+const { values } = parseArgs({ argv, options })
+
+// version mode
+if (values.version) {
+  console.log(`${app.name} ${app.version}`)
+  process.exit(0)
+}
+
+// help mode
+if (values.help) {
+  console.log(syntax)
+  process.exit(0)
+}
+
+// type is an alias of format
+if (values.type) {
+  values.format = values.type
+  delete values.type
+}
+
+// parse the iterations parameter as an integer
+try {
+  values.iterations = parseInt(values.iterations)
+  if (isNaN(values.iterations)) {
+    values.iterations = 1
+  }
+} catch {
+  console.error('iterations must be a number')
+  process.exit(5)
+}
+
 const fs = require('fs')
 const datagen = require('../index.js')
 let template = ''
 const piped = (!process.stdin.isTTY)
 let rs = null
 
-// get command-line arguements
-const argv = require('yargs')
-  .option('format', { alias: ['f', 'type'], describe: 'Format of output data: json,csv,none', demandOption: false, default: 'none' })
-  .option('iterations', { alias: 'i', describe: 'Number of records to generater', demandOption: false, default: 1 })
-  .option('template', { alias: 't', describe: 'The path of the template file', demandOption: false })
-  .option('list', { alias: 'l', boolean: true, describe: 'List available tags', demandOption: false, default: false })
-  .help('help')
-  .argv
-
-if (argv.list) {
+if (values.list) {
   console.log(datagen.listTags())
-  process.exit()
+  process.exit(0)
 }
 
 // die with error code
@@ -30,14 +98,14 @@ const die = function (msg, errCode) {
 if (piped) {
   rs = process.stdin
 } else {
-  if (!argv.template) {
+  if (!values.template) {
     die('A template must be supplied')
   }
-  rs = fs.createReadStream(argv.template)
+  rs = fs.createReadStream(values.template)
 }
 
 // make sure valid format has been supplied
-if (argv.format !== 'csv' && argv.format !== 'json' && argv.format !== 'none' && argv.format !== 'xml') {
+if (values.format !== 'csv' && values.format !== 'json' && values.format !== 'none' && values.format !== 'xml') {
   die('format must be either none, xml, json or csv', 1)
 }
 
@@ -50,7 +118,7 @@ rs.on('readable', () => {
   template = template.trim()
 }).on('end', () => {
   // when the template has loaded, generate the data
-  datagen.generate(template, argv.format, argv.iterations)
+  datagen.generate(template, values.format, values.iterations)
     .on('data', (d) => { console.log(d) })
     .on('end', (d) => { })
 }).on('error', (e) => {
