@@ -700,12 +700,15 @@ e.g.
 
 Decimal latitude.
 
-Parameters: none
+Parameters: 
+
+- city - one of `LON`, `NYC`, `TOK`, `SYD` or `PAR`. If omitted a latitude anywhere in the world will by returned.
 
 e.g.
 
 ```
 {{latitude}} ---> -54.4371
+{{latitude PAR}} ---> 48.8823
 ```
 
 ### {{letters}}
@@ -727,12 +730,15 @@ e.g.
 
 Decimal longitude.
 
-Parameters: none
+Parameters: 
+
+- city - one of `LON`, `NYC`, `TOK`, `SYD` or `PAR`. If omitted a longitude anywhere in the world will by returned.
 
 e.g.
 
 ```
 {{longitude}} ---> 175.2526
+{{longitude PAR}} ---> 2.3815
 ```
 
 ### {{mac}}

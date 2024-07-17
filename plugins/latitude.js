@@ -1,5 +1,7 @@
 const float = require('./float.js')
+const cities = require('./includes/cities.js')
 
-module.exports = () => {
-  return float('-90.0', '90.0', 4)
+module.exports = (cityName) => {
+  const city = cityName && cities[cityName] ? cities[cityName] : cities['DEFAULT']
+  return float(city.bottomLeft.lat, city.topRight.lat, 4)
 }
