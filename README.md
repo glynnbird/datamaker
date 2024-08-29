@@ -210,12 +210,18 @@ $ echo '{{ name | toLowerCase | sha256 }}' | datamaker
 
 - `toUpperCase`
 - `toLowerCase`
+- `toTitleCase`
 - `toArray`
 - `md5`
 - `sha1`
 - `sha256`
 - `base64`
 - `toString`
+- `toBool`
+- `toFloat`
+- `toInt`
+- `toObject`
+
 
 Additionally for JSON formats, the following filters can be used within
 templates to output appropriate JSON datatypes:-
@@ -256,8 +262,8 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 
 The code for the tags can be found in the `plugins` folder of the source code.
 
-- A-E - [addressuk](#addressuk) [addressus](#addressus) [addressgerman](#addressgerman) [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [cityGerman](#cityGerman) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii) [ethnicity](#ethnicity)
-- F-O - [file](#file) [firstname](#firstname) [float](#float) [integer](#integer) [ip](#ip) [ip6](#ip6) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [mac](#mac) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [occupation](#occupation) [oneof](#oneof)
+- A-E - [addressuk](#addressuk) [addressus](#addressus) [addressgerman](#addressgerman) [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [cityGerman](#cityGerman) [clf](#clf) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii) [ethnicity](#ethnicity)
+- F-O - [file](#file) [firstname](#firstname) [float](#float) [http_method](#http_method) [http_path](#http_path) [http_reponse](#http_response) [integer](#integer) [ip](#ip) [ip6](#ip6) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [mac](#mac) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [occupation](#occupation) [oneof](#oneof)
 - P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [product](#product) [religion](#religion) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [streetGerman](#streetGerman) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
 - U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [uuidv4](#uuidv4) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
 
@@ -373,6 +379,18 @@ e.g.
 
 ```
 {{cityGerman}} ---> Berlin
+```
+
+### {{clf}}
+
+Log line in [Common Logfile Format](https://www.w3.org/Daemon/User/Config/Logging.html#common-logfile-format).
+
+Parameters: none
+
+e.g.
+
+```
+{{clf}} ---> 208.148.153.238 - lelah [29/Aug/2024:14:22:49 +0100] "GET /reel/hip.html HTTP/1.0" 200 71733
 ```
 
 ### {{company}}
@@ -602,6 +620,48 @@ e.g.
 ```
 {{float}} ---> 13.8592
 {{float 1000 2000 2}} ---> 1750.06
+```
+
+### {{http_method}}
+
+HTTP method. Either GET/PUT/POST/DELETE/HEAD/COPY, much more likely to be GET.
+
+Parameters: 
+
+- n/a
+
+e.g.
+
+```
+{{http_method}} ---> GET
+```
+
+### {{http_path}}
+
+HTTP path.
+
+Parameters: 
+
+- n/a
+
+e.g.
+
+```
+{{http_path}} ---> /curious/ranch/viruses.html?barriers=AJEAZDLK65QFHKZ1
+```
+
+### {{http_response}}
+
+HTTP response code. Either 200/400/401/403/302/500, much more likely to be 200.
+
+Parameters: 
+
+- n/a
+
+e.g.
+
+```
+{{http_response}} ---> 200
 ```
 
 ### {{integer}}

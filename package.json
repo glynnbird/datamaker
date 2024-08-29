@@ -1,6 +1,6 @@
 {
   "name": "datamaker",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Sample data generator - command-line utility and library",
   "main": "index.js",
   "bin": {
