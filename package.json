@@ -26,8 +26,5 @@
   "homepage": "https://github.com/glynnbird/datamaker#readme",
   "dependencies": {
     "kuuid": "^1.0.3"
-  },
-  "engines": {
-    "node": ">16.17.0"
   }
 }
