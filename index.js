@@ -134,6 +134,9 @@ const swap = async (template, tags, formatter) => {
             case 'sha256':
               replacement = crypto.createHash('sha256').update(replacement).digest('hex')
               break
+            case 'sha512':
+              replacement = crypto.createHash('sha512').update(replacement).digest('hex')
+              break
             case 'base64':
               replacement = Buffer.from(replacement).toString('base64')
               break

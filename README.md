@@ -215,13 +215,13 @@ $ echo '{{ name | toLowerCase | sha256 }}' | datamaker
 - `md5`
 - `sha1`
 - `sha256`
+- `sha512`
 - `base64`
 - `toString`
 - `toBool`
 - `toFloat`
 - `toInt`
 - `toObject`
-
 
 Additionally for JSON formats, the following filters can be used within
 templates to output appropriate JSON datatypes:-
