@@ -1,16 +1,18 @@
 module.exports = (min, max) => {
   const r = Math.random()
+  let m
   if (r < 0.90) {
-    return 'GET'
+    m = 'GET'
   } else if (r < 0.95) {
-    return 'POST'
+    m = 'POST'
   } else if (r < 0.97) {
-    return 'PUT'
+    m = 'PUT'
   } else if (r < 0.98) {
-    return 'DELETE'
+    m = 'DELETE'
   } else if (r < 0.99) {
-    return 'HEAD'
+    m = 'HEAD'
   } else {
-    return 'COPY'
+    m = 'COPY'
   }
+  return m
 }
