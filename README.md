@@ -263,7 +263,7 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 The code for the tags can be found in the `plugins` folder of the source code.
 
 - A-E - [addressuk](#addressuk) [addressus](#addressus) [addressgerman](#addressgerman) [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [cityGerman](#cityGerman) [clf](#clf) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii) [ethnicity](#ethnicity)
-- F-O - [file](#file) [firstname](#firstname) [float](#float) [http_method](#http_method) [http_path](#http_path) [http_reponse](#http_response) [integer](#integer) [ip](#ip) [ip6](#ip6) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [mac](#mac) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [occupation](#occupation) [oneof](#oneof) [oneofl](#oneofl)
+- F-O - [file](#file) [firstname](#firstname) [float](#float) [http_method](#http_method) [http_path](#http_path) [http_query_string](#http_query_string) [http_reponse](#http_response) [integer](#integer) [ip](#ip) [ip6](#ip6) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [mac](#mac) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [occupation](#occupation) [oneof](#oneof) [oneofl](#oneofl)
 - P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [product](#product) [religion](#religion) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [streetGerman](#streetGerman) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
 - U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [uuidv4](#uuidv4) [walk](#walk) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
 
@@ -648,6 +648,20 @@ e.g.
 
 ```
 {{http_path}} ---> /curious/ranch/viruses.html?barriers=AJEAZDLK65QFHKZ1
+```
+
+### {{http_query_string}}
+
+An HTTP query string.
+
+Parameters
+
+- None
+
+e.g.
+
+```
+{{http_query_string}} ---> ?offering=26&approaches=electricity&unsigned=sectors&actively=villa&adam=81ZVYDTDPXQTSK4J
 ```
 
 ### {{http_response}}

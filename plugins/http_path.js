@@ -1,6 +1,6 @@
 const word = require('./word.js')
 const options = ['.html', '.php', '.aspx', '']
-const uuid = require('./uuid.js')
+const http_query_string = require('./http_query_string.js')
 
 module.exports = function () {
   const wordCount = Math.floor(Math.random() *3) + 1
@@ -11,10 +11,7 @@ module.exports = function () {
   const r = Math.floor(Math.random() * options.length)
   let d = '/' + words.join('/') + options[r]
   if (Math.random() > 0.9) {
-    d += '?' + word() + '=' + uuid()
-    if (Math.random() > 0.5) {
-      d += '&' + word() + '=' + uuid()
-    }
+    d += http_query_string()
   } else if (Math.random() > 0.9) {
     d += '#' + word()
   }
