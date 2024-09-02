@@ -265,7 +265,7 @@ The code for the tags can be found in the `plugins` folder of the source code.
 - A-E - [addressuk](#addressuk) [addressus](#addressus) [addressgerman](#addressgerman) [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [cityGerman](#cityGerman) [clf](#clf) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii) [ethnicity](#ethnicity)
 - F-O - [file](#file) [firstname](#firstname) [float](#float) [http_method](#http_method) [http_path](#http_path) [http_reponse](#http_response) [integer](#integer) [ip](#ip) [ip6](#ip6) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [mac](#mac) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [occupation](#occupation) [oneof](#oneof) [oneofl](#oneofl)
 - P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [product](#product) [religion](#religion) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [streetGerman](#streetGerman) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
-- U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [uuidv4](#uuidv4) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
+- U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [uuidv4](#uuidv4) [walk](#walk) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
 
 ### {{addressuk}}
 
@@ -1212,6 +1212,27 @@ e.g.
 
 ```
 {{uuidv4}} ---> d1e606b0-0452-46a7-9190-8671a82fdea0
+```
+
+### {{ walk }}
+
+Random walk. A single floating point number that "walks" in value between invocations.
+
+Parameters:
+
+- start - the start value (Default: 0)
+- inc - the max increment (Default: 1)
+- places - the number of decimal places in the output (Default: 4)
+- ref - a reference for this value, so that multiple "walk" tags can be used in the same datamaker template (Default: ref)
+
+e.g.
+
+```
+{{walk}} ---> -0.4405
+{{walk 50 0.5 6 x}} ---> 50.099534
+{{walk -1.1 0.2 6 y}} ---> -1.163953
+{{walk 50 0.5 6 x}} ---> 50.311757
+{{walk -1.1 0.2 6 y}} ---> -0.965426
 ```
 
 ### {{website}}
