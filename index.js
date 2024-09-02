@@ -109,6 +109,9 @@ const swap = async (template, tags, formatter) => {
         for (const j in tag.filter) {
           const filter = tag.filter[j]
           switch (filter) {
+            case 'encodeURIComponent':
+              replacement = encodeURIComponent(replacement)
+              break
             case 'toLowerCase':
               replacement = replacement.toLowerCase()
               break

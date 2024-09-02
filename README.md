@@ -222,6 +222,7 @@ $ echo '{{ name | toLowerCase | sha256 }}' | datamaker
 - `toFloat`
 - `toInt`
 - `toObject`
+- `encodeURIComponent`
 
 Additionally for JSON formats, the following filters can be used within
 templates to output appropriate JSON datatypes:-
