@@ -263,7 +263,7 @@ The Mustache-style tags you may use are listed below. Some tags allow extra para
 The code for the tags can be found in the `plugins` folder of the source code.
 
 - A-E - [addressuk](#addressuk) [addressus](#addressus) [addressgerman](#addressgerman) [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [cityGerman](#cityGerman) [clf](#clf) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii) [ethnicity](#ethnicity)
-- F-O - [file](#file) [firstname](#firstname) [float](#float) [http_method](#http_method) [http_path](#http_path) [http_reponse](#http_response) [integer](#integer) [ip](#ip) [ip6](#ip6) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [mac](#mac) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [occupation](#occupation) [oneof](#oneof)
+- F-O - [file](#file) [firstname](#firstname) [float](#float) [http_method](#http_method) [http_path](#http_path) [http_reponse](#http_response) [integer](#integer) [ip](#ip) [ip6](#ip6) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [mac](#mac) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [occupation](#occupation) [oneof](#oneof) [oneofl](#oneofl)
 - P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [product](#product) [religion](#religion) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [streetGerman](#streetGerman) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
 - U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [uuidv4](#uuidv4) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
 
@@ -851,7 +851,7 @@ e.g.
 
 ### {{oneof}}
 
-Picks one of supplied values.
+Picks one of supplied values with an equal chance of each value appearing. See also [oneofl](#oneofl).
 
 Parameters: any number of strings
 
@@ -859,6 +859,37 @@ e.g.
 
 ```
 {{oneof Gryffindor Hufflepuff Ravenclaw Slytherin}} ---> Slytherin
+```
+
+### {{oneofl}}
+
+Picks one of supplied values, items at the start of the list are much more likely to be returned. (the `l` in `oneofl` stands for "Log", as the `Math.log10` function is used to get a non-linear probability of returning array items.)
+
+Parameters: any number of strings
+
+e.g.
+
+```
+{{oneofl complete new rejected cancelled }} ---> complete
+```
+
+Here's the distribution of results:
+
+```sh
+echo '{{oneofl a b c d e f g h i j k l m }}' | datamaker -i 10000 | sort | uniq -c
+2692 a
+1550 b
+1097 c
+ 860 d
+ 675 e
+ 541 f
+ 465 g
+ 421 h
+ 388 i
+ 393 j
+ 317 k
+ 308 l
+ 293 m
 ```
 
 ### {{name}}
