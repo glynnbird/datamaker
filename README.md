@@ -179,14 +179,14 @@ $ datamaker -t ./template.xml -f xml -i 500
 Combining this tool with the [couchimport](https://www.npmjs.com/package/couchimport) utility allows data to be generated and imported into the a Cloudant/CouchDB database in one go:
 
 ```sh
-$ datamaker -t ./template.json -f json -i 100 | couchimport --database mydatabase --type jsonl
-  couchimport Written ok:100 - failed: 0 -  (100) +1s
-  couchimport { documents: 100, failed: 0, total: 100, totalfailed: 0 } +0ms
-  couchimport writecomplete { total: 100, totalfailed: 0 } +96ms
-  couchimport Import complete +0ms
+$ datamaker -t ./template.json -f json -i 1000 | couchimport --db mydatabase
+Reading data from stdin
+written {"batch":1,"batchSize":500,"docSuccessCount":500,"docFailCount":0,"statusCodes":{"201":1},"errors":{}}
+written {"batch":2,"batchSize":500,"docSuccessCount":1000,"docFailCount":0,"statusCodes":{"201":2},"errors":{}}
+Import complete
 ```
 
-They key thing here is to use `--type jsonl` which instructs `couchimport` to expect one JSON document per line. The *couchimport* utility bundles the JSON into bulk API calls and posts them to the database via HTTP.
+The *couchimport* utility bundles the JSON into bulk API calls and posts them to the database via HTTP.
 
 ## Filters
 
