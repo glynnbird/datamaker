@@ -10,6 +10,5 @@ const int = () => {
 }
 module.exports = () => {
   const mac = [int(), int(), int(), int(), int(), int()].map(x => pad(x.toString(16))).join('-')
-  cache.set('mac', mac)
   return mac
 }
