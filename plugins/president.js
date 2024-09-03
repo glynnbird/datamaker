@@ -43,7 +43,9 @@ const options = [
   'Bill Clinton',
   'George W. Bush',
   'Barack Obama',
-  'Donald J Trump']
+  'Donald J Trump',
+  'Joseph R Biden'
+]
 
 module.exports = () => {
   const r = Math.floor(Math.random() * options.length)
