@@ -1,4 +1,3 @@
-
 module.exports = (...args) => {
   if (args.length === 0) {
     return ''

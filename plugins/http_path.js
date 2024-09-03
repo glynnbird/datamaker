@@ -3,7 +3,7 @@ const options = ['.html', '.php', '.aspx', '']
 const http_query_string = require('./http_query_string.js')
 
 module.exports = function () {
-  const wordCount = Math.floor(Math.random() *3) + 1
+  const wordCount = Math.floor(Math.random() * 3) + 1
   const words = []
   for (let i = 0; i < wordCount; i++) {
     words.push(word())

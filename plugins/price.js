@@ -1,4 +1,3 @@
-
 const integer = require('./integer.js')
 
 module.exports = (min, max) => {

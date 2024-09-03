@@ -9,12 +9,12 @@ module.exports = (local) => {
   } else {
     // create a pool of 1000 ips to pick from
     if (pool.length === 0) {
-      for(let i = 0 ; i < poolSize; i++) {
+      for (let i = 0; i < poolSize; i++) {
         ip = [integer(1, 253), integer(1, 253), integer(1, 253), integer(1, 253)].join('.')
         pool.push(ip)
       }
     }
-    ip =  pool[Math.floor(Math.random() * poolSize)]
+    ip = pool[Math.floor(Math.random() * poolSize)]
   }
   return ip
 }

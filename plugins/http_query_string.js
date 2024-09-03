@@ -4,9 +4,9 @@ const uuid = require('./uuid.js')
 const integer = require('./integer.js')
 
 module.exports = () => {
-  const paramCount = 1 + Math.floor(Math.random()*5)
+  const paramCount = 1 + Math.floor(Math.random() * 5)
   const obj = {}
-  for (let p = 0 ; p < paramCount; p++) {
+  for (let p = 0; p < paramCount; p++) {
     const key = words('1')
     let val
     const r = Math.random()

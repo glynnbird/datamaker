@@ -1,4 +1,3 @@
-const cache = require('../cache.js')
 const pool = []
 const poolSize = 1000
 const int = () => {
@@ -11,12 +10,12 @@ module.exports = (local) => {
   } else {
     // create a pool of 1000 ips to pick from
     if (pool.length === 0) {
-      for(let i = 0 ; i < poolSize; i++) {
+      for (let i = 0; i < poolSize; i++) {
         ip6 = [int(), int(), int(), int(), int(), int(), int(), int()].map(x => x.toString(16)).join(':')
         pool.push(ip6)
       }
     }
-    ip6 =  pool[Math.floor(Math.random() * poolSize)] 
+    ip6 = pool[Math.floor(Math.random() * poolSize)]
   }
   return ip6
 }

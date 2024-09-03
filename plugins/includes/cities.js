@@ -20,7 +20,7 @@ module.exports = {
     topRight: { lat: 48.8866, long: 2.3954 }
   },
   DEFAULT: {
-    bottomLeft: { lat: -90, long: -180},
-    topRight: { lat: 90, long: 180}
+    bottomLeft: { lat: -90, long: -180 },
+    topRight: { lat: 90, long: 180 }
   }
 }
