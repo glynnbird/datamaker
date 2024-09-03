@@ -261,7 +261,25 @@ const iterateLoop = (obj) => {
   return obj
 }
 
+const single = async (str, format) => {
+  return new Promise((resolve, reject) => {
+    generate(str, format || 'none', 1)
+      .on('data', (d) => { resolve(d) })
+  })
+}
+
+const batch = async (str, format, iterations) => {
+  const b = []
+  return new Promise((resolve, reject) => {
+    generate(str, format || 'none', iterations)
+      .on('data', (d) => { b.push(d) })
+      .on('end', () => { resolve(b) })
+  })
+}
+
 module.exports = {
   generate,
-  listTags
+  listTags,
+  single,
+  batch
 }
