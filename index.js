@@ -5,8 +5,7 @@ const formatterNames = fs.readdirSync(path.join(__dirname, 'formatters')).map((f
 const cache = require('./cache.js')
 const crypto = require('crypto')
 
-// scan for list of files in specified directory
-const scanForFiles = (dirPath, arrayOfPlugins, namespace) => {
+const scanForPlugins = (dirPath, arrayOfPlugins = [], namespace) => {
   // checks if the directory exists before trying to scan it
   if (fs.existsSync(dirPath)) {
     // lists and then iterates over all the files / directories
@@ -19,17 +18,12 @@ const scanForFiles = (dirPath, arrayOfPlugins, namespace) => {
         const plugin = file.replace(/\.js$/, '')
         // if it is a custom namespace it will have a namespace which forms part of the tag name
         const tagName = namespace ? `${namespace}:${plugin}` : plugin
-        arrayOfPlugins.push(tagName)
+
+        arrayOfPlugins.push(`{{${tagName}}}`)
       }
     })
   }
   return arrayOfPlugins
-}
-
-// scan for list of {{tags}}
-const scanForPlugins = (dirPath, arrayOfPlugins = [], namespace) => {
-  arrayOfPlugins = scanForFiles(dirPath, arrayOfPlugins, namespace)
-  return arrayOfPlugins.map((s) => { return `{{${s}}}` })
 }
 
 const getPlugins = () => {
@@ -44,7 +38,7 @@ const getPlugins = () => {
 }
 
 const tagNames = getPlugins().join('\n')
-const filterNames = scanForFiles(path.join(__dirname, 'filters'), [])
+const filterNames = scanForPlugins(path.join(__dirname, 'filters'), []).map((s) => { return s.replace(/{{/g,'').replace(/}}/g,'')})
 
 // locate occurences of things surrounded in double curly {{brackets}}
 const findTags = (str) => {
@@ -187,7 +181,9 @@ const generate = (str, format, iterations) => {
 
 // list possible tag names
 const listTags = () => {
-  return tagNames
+  let str = `TAGS\n\n${tagNames}\n\n`
+  str += `FILTERS\n\n${filterNames.join('\n')}`
+  return str
 }
 
 const iterateLoop = (obj) => {
