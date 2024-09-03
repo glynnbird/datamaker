@@ -21,8 +21,6 @@ DERC4Y2BQ6HCI0HI,1983-08-11,Cathleen Leal,earlenemattson@gmail.com
 JDYSVPTAEXKEF9D8,1982-10-29,Dionne Vann,martin.renfro@hemicrane.com
 ```
 
-You can see the *datamaker* library in action at https://glynnbird.github.io/datamakerui/
-
 ## Pre-requisites
 
 [Node.js & npm](https://nodejs.org/en/) are required to be pre-installed. 
@@ -1381,7 +1379,7 @@ Resulting in the following:
 
 ## Formatting
 
-The `--formst`/`-f` parameter defines
+The `--format`/`-f` parameter defines
 
 - how the text in each substition is pre-processed before output e.g. in `json` mode double quotes are escaped correctly.
 - how each line of output is processed prior to output e.g. in `json` mode the completed template is parsed to check it is valid JSON before being output on a a single line followed by a `\n` character
