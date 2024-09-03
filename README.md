@@ -221,6 +221,8 @@ $ echo '{{ name | toLowerCase | sha256 }}' | datamaker
 - `toInt`
 - `toObject`
 - `encodeURIComponent`
+- `escapeSingleQuotes` - replaces single single quotes withe two single quotes, handy when generating SQL.
+- `escapeDoubleQuotes` - replaces single double quotes with two double quotes.
 
 Additionally for JSON formats, the following filters can be used within
 templates to output appropriate JSON datatypes:-

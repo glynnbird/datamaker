@@ -109,6 +109,12 @@ const swap = async (template, tags, formatter) => {
         for (const j in tag.filter) {
           const filter = tag.filter[j]
           switch (filter) {
+            case 'escapeSingleQuotes':
+              replacement = replacement.replace(/'/g, "''")
+            break
+            case 'escapeDoubleQuotes':
+              replacement = replacement.replace(/"/g, '""')
+            break
             case 'encodeURIComponent':
               replacement = encodeURIComponent(replacement)
               break
