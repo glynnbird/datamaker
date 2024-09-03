@@ -111,6 +111,10 @@ const swap = async (template, tags, formatter) => {
             const filterMod = import(path.join(__dirname, 'filters', `${filter}.js`))
             const { default: filterCode } = await filterMod
             replacement = await filterCode.apply(null, [replacement])
+            if (['toBool', 'toInt', 'toFloat', 'toObject'].includes(filter)) {
+              console.log('original switch')
+              original = `"${original}"`
+            }
           } else {
             throw new Error(`unknown filter "${filter}" in tag ${tag.original}`)
           }        
