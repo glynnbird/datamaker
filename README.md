@@ -1327,6 +1327,15 @@ dg.generate(template, format, iterations)
   .on('end', (d) => { console.error('Done!') })
 ```
 
+or there are helper functions that return Promises e.g.
+
+```js
+// get a single item
+await dg.single('{{uuid}},{{name}}', 'csv')
+// get a batch of 50 items
+await dg.batch('{"name": "{{name}}","email": "{{email}}"}', 'json', 50)
+```
+
 ### Custom Plugins
 
 When using datamaker as a library it is possible to extend its capability by defining custom plugins to suit the individual needs of a project. A custom plugin should be located inside the `/datamaker/plugins/` folder at the root of the applications project with each plugin created as a separate js file within a `namespace` folder allowing plugins to referenced in templates as `{{namespace:plugin}}`. For example:
