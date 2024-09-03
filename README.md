@@ -76,7 +76,19 @@ JSON data is generated in a similar way. This time our template represents a sin
 {
   "_id": "{{uuid}}",
   "name": "{{firstname}} {{surname}}",
+  "occupation": "{{occupation}}",
+  "religion": "{{religion}}",
   "dob": "{{date 2014-01-01}}",
+  "status": "{{oneofl ok provisional rejected cancelled deleted}}",
+  "accountType": "{{oneof bronze silver gold}}",
+  "password": "{{password | sha256}}",
+  "salt": "{{ words 5 | sha512}}",
+  "lastIP": "{{ ip }}",
+  "lastLogin": "{{date_iso 2020-01-01}}",
+  "location": {
+    "longitude": "{{ longitude NYC }}",
+    "latitude": "{{ latitude NYC }}"
+  },
   "address": {
     "street": "{{street}}",
     "town": "{{town}}",
@@ -84,13 +96,11 @@ JSON data is generated in a similar way. This time our template represents a sin
   },
   "telephone": "{{tel}}",
   "pets": ["{{cat}}","{{dog}}"],
-  "((loop children 4))":"{{firstname}}"
-  "score": {{float 1 10 1}},
-  "email": "{{email}}",
+  "email": "{{email true}}",
   "url": "{{website}}",
   "description": "{{words 20}}",
-  "verified": {{boolean 0.75}},
-  "salary": {{float 10000 70000 0}},
+  "((loop children 4))":"{{firstname}}",
+  "((loop friends 3))": {"name": "{{name}}", "email": "{{email}}"}
 }
 ```
 
@@ -100,7 +110,7 @@ Run the `datamaker` as before but with `json` as the format parameter:
 
 ```sh
 $ datamaker -t ./template.json -f json -i 500 
-{"_id":"G3BX8LUGFHAGFX7A","name":"Chelsea Ballou","dob":"2003-10-10","address":{"street":"0055 Houghton","town":"Tynemouth","postode":"HU0 4GF"},"telephone":"+509-9934-828-292","pets":["Murphy","Nala"],"children":["John","Anne", "Tracy","Amelie"],"score":9.5,"email":"nelson_jones@spousy.com","url":"http://propriospinal.com","description":"outmate solarometer Zapara tyro keratinize galactolytic divestiture swardy petaled tearlessness adjutorious epigynum jotation tavernly suggestum Eriophyes straint Tsuma malignation autoscience","verified":true,"salary":32082}
+{"_id":"e87691f3232e493a8f7d5ed866bbf813","name":"Gertrude Ashcraft","occupation":"Television production assistant","religion":"Jeung San Do","dob":"2022-06-17","status":"cancelled","accountType":"silver","password":"6ae95ca5f8098007fc09f75761e85d4d1f6c9dc16e3f1679de4196127b0387b7","salt":"ccf2adf7bd7590eb2444c2ca0393805c534f60686c877b0a12c32dc645f9006d8ea3df9aeb0ebbeba941bb9cc54b3f6688b614ccfbcfa6954f86ba66fbec76e5","lastIP":"83.118.14.45","lastLogin":"2022-06-09T13:25:44.406Z","location":{"longitude":"-73.9759","latitude":"40.7312"},"address":{"street":"6681 Shipley","town":"Caister on Sea","postode":"RH5 7XD"},"telephone":"+597-4041-660-496","pets":["Rusty","Roxy"],"email":"gertrude.ashcraft6@hotmail.com","url":"https://toronto.com","description":"bedding insertion advisory bunch terms manual language parameter gs jurisdiction experiment signing gratuit cheapest initiative kai proxy anniversary prescribed penetration","children":["Idalia","Allyson","Jadwiga","Luci"],"friends":[{"name":"Dalila Dunbar","email":"judi.laughlin@friend.com"},{"name":"Tambra Caraway","email":"virgil_cornell@vitamin.nr"},{"name":"Cathleen Rivero","email":"kathleen_card54@gmail.com"}]}
 ...
 ```
 
@@ -143,6 +153,8 @@ results in
   ]
 }
 ```
+
+> Note: to use the `((loop .. ))` syntax, you must be using JSON mode (i.e. `-f json` and the template itself must parse as JSON correctly, which in practice means using no generated numbers or boolans).
 
 ## Generating XML data
 
@@ -224,38 +236,34 @@ $ echo '{{ name | toLowerCase | sha256 }}' | datamaker
 - `escapeSingleQuotes` - replaces single single quotes withe two single quotes, handy when generating SQL.
 - `escapeDoubleQuotes` - replaces single double quotes with two double quotes.
 
-Additionally for JSON formats, the following filters can be used within
-templates to output appropriate JSON datatypes:-
+Additionally for JSON formats, the following filters can be used within templates to output appropriate JSON datatypes:-
 
 - `toBool`
 - `toFloat`
 - `toInt`
 - `toObject`
 
-E.g. 
+As well as performing type conversion, these functions also "eat" up any double quotes around the host tag e.g.
 
-```json
+```js
 {
   "alive": "{{boolean 0.75 | toBool}}",
   "count": "{{integer | toInt}}",
-  "score": "{{float | toFloat}}",
-  "address": "{{custom:plugin | toObject}}",
+  "score": "{{float | toFloat}}"
 }
 ```
 
-Returns:-
+returns:
 
-```json
+```js
 {
   "alive": true,
   "count": 10,
-  "score": 5.0,
-  "address": {
-    "street": "High Street",
-    "postcode": "PA2 0DL"
-  }
+  "score": 5.0
 }
 ```
+
+which is useful for making both the original template and the resultant object parse as valid JSON.
 
 ## Tag reference
 

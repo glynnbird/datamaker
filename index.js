@@ -23,7 +23,6 @@ const scanForPlugins = (dirPath, arrayOfPlugins = [], namespace) => {
       }
     })
   }
-
   return arrayOfPlugins
 }
 
@@ -39,6 +38,7 @@ const getPlugins = () => {
 }
 
 const tagNames = getPlugins().join('\n')
+const filterNames = scanForPlugins(path.join(__dirname, 'filters'), []).map((s) => { return s.replace(/{{/g,'').replace(/}}/g,'')})
 
 // locate occurences of things surrounded in double curly {{brackets}}
 const findTags = (str) => {
@@ -101,75 +101,23 @@ const swap = async (template, tags, formatter) => {
 
       // calculate the replacement
       let replacement = formatter.filter(await code.apply(null, tag.parameters))
-
       let original = tag.original
 
-      // apply filter
+      // apply filters
       if (tag.filter) {
         for (const j in tag.filter) {
           const filter = tag.filter[j]
-          switch (filter) {
-            case 'escapeSingleQuotes':
-              replacement = replacement.replace(/'/g, "''")
-            break
-            case 'escapeDoubleQuotes':
-              replacement = replacement.replace(/"/g, '""')
-            break
-            case 'encodeURIComponent':
-              replacement = encodeURIComponent(replacement)
-              break
-            case 'toLowerCase':
-              replacement = replacement.toLowerCase()
-              break
-            case 'toUpperCase':
-              replacement = replacement.toUpperCase()
-              break
-            case 'toTitleCase':
-              replacement = replacement.toLowerCase()
-              if (replacement.length > 0) {
-                const uc = replacement[0].toUpperCase()
-                replacement = replacement.replace(new RegExp('^' + replacement[0]), uc)
-              }
-              break
-            case 'toArray':
-              replacement = JSON.stringify(replacement.split(/\W/))
-              break
-            case 'md5':
-              replacement = crypto.createHash('md5').update(replacement).digest('hex')
-              break
-            case 'sha1':
-              replacement = crypto.createHash('sha1').update(replacement).digest('hex')
-              break
-            case 'sha256':
-              replacement = crypto.createHash('sha256').update(replacement).digest('hex')
-              break
-            case 'sha512':
-              replacement = crypto.createHash('sha512').update(replacement).digest('hex')
-              break
-            case 'base64':
-              replacement = Buffer.from(replacement).toString('base64')
-              break
-            case 'toBool':
-              replacement = replacement === 'true'
-              original = `"${tag.original}"`
-              break
-            case 'toFloat':
-              replacement = parseFloat(replacement)
-              original = `"${tag.original}"`
-              break
-            case 'toInt':
-              replacement = parseInt(replacement)
-              original = `"${tag.original}"`
-              break
-            case 'toObject':
-              original = `"${tag.original}"`
-              break
-            case 'toString':
-              replacement = replacement.toString()
-              break
-            default:
-              break
-          }
+          if (filterNames.includes(filter)) {
+            const filterMod = import(path.join(__dirname, 'filters', `${filter}.js`))
+            const { default: filterCode } = await filterMod
+            replacement = await filterCode.apply(null, [replacement])
+            if (['toBool', 'toInt', 'toFloat', 'toObject'].includes(filter)) {
+              console.log('original switch')
+              original = `"${original}"`
+            }
+          } else {
+            throw new Error(`unknown filter "${filter}" in tag ${tag.original}`)
+          }        
         }
       }
 
@@ -178,6 +126,8 @@ const swap = async (template, tags, formatter) => {
 
       // switch the tag in the template for the replacement
       str = str.replace(original, replacement)
+    } else {
+      throw new Error(`invalid tag ${tag.tag} in ${tag.original}`)
     }
   }
 
@@ -235,7 +185,9 @@ const generate = (str, format, iterations) => {
 
 // list possible tag names
 const listTags = () => {
-  return tagNames
+  let str = `TAGS\n\n${tagNames}\n\n`
+  str += `FILTERS\n\n${filterNames.join('\n')}`
+  return str
 }
 
 const iterateLoop = (obj) => {
