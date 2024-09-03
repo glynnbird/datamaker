@@ -224,39 +224,6 @@ $ echo '{{ name | toLowerCase | sha256 }}' | datamaker
 - `escapeSingleQuotes` - replaces single single quotes withe two single quotes, handy when generating SQL.
 - `escapeDoubleQuotes` - replaces single double quotes with two double quotes.
 
-Additionally for JSON formats, the following filters can be used within
-templates to output appropriate JSON datatypes:-
-
-- `toBool`
-- `toFloat`
-- `toInt`
-- `toObject`
-
-E.g. 
-
-```json
-{
-  "alive": "{{boolean 0.75 | toBool}}",
-  "count": "{{integer | toInt}}",
-  "score": "{{float | toFloat}}",
-  "address": "{{custom:plugin | toObject}}",
-}
-```
-
-Returns:-
-
-```json
-{
-  "alive": true,
-  "count": 10,
-  "score": 5.0,
-  "address": {
-    "street": "High Street",
-    "postcode": "PA2 0DL"
-  }
-}
-```
-
 ## Tag reference
 
 The Mustache-style tags you may use are listed below. Some tags allow extra parameters to be supplied to affect the range of random data generated
