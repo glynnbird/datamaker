@@ -112,7 +112,6 @@ const swap = async (template, tags, formatter) => {
             const { default: filterCode } = await filterMod
             replacement = await filterCode.apply(null, [replacement])
             if (['toBool', 'toInt', 'toFloat', 'toObject'].includes(filter)) {
-              console.log('original switch')
               original = `"${original}"`
             }
           } else {
