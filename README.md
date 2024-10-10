@@ -1237,7 +1237,7 @@ e.g.
 {{uuidv4}} ---> d1e606b0-0452-46a7-9190-8671a82fdea0
 ```
 
-### {{ walk }}
+### {{walk}}
 
 Random walk. A single floating point number that "walks" in value between invocations.
 
