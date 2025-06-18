@@ -1,8 +1,9 @@
-const word = require('./word.js')
+import word from './word.js'
+import http_query_string from './http_query_string.js'
 const options = ['.html', '.php', '.aspx', '']
-const http_query_string = require('./http_query_string.js')
 
-module.exports = function () {
+
+export default function () {
   const wordCount = Math.floor(Math.random() * 3) + 1
   const words = []
   for (let i = 0; i < wordCount; i++) {

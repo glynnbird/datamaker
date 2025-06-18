@@ -1,12 +1,8 @@
-const filter = function (str) {
+export function filter(str) {
   return JSON.stringify(str).replace(/^"/, '').replace(/"$/, '')
 }
 
-const postCommit = function (str) {
+export function postCommit(str) {
   return JSON.stringify(JSON.parse(str))
 }
 
-module.exports = {
-  filter,
-  postCommit
-}

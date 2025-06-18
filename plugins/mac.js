@@ -7,7 +7,7 @@ const pad = (n) => {
 const int = () => {
   return Math.floor(Math.random() * 255)
 }
-module.exports = () => {
+export default function() {
   const mac = [int(), int(), int(), int(), int(), int()].map(x => pad(x.toString(16))).join('-')
   return mac
 }

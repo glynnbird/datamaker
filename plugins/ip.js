@@ -1,8 +1,8 @@
-const integer = require('./integer.js')
+import integer from './integer.js'
 const pool = []
 const poolSize = 1000
 
-module.exports = (local) => {
+export default function(local) {
   let ip
   if (local === 'true') {
     ip = [192, 168, 1, integer(1, 253)].join('.')

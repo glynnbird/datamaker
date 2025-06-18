@@ -856,7 +856,7 @@ const options = [
   'spooky',
   'software']
 
-module.exports = (hash) => {
+export default function() {
   const r = Math.floor(Math.random() * options.length)
   return options[r]
 }

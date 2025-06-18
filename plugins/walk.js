@@ -1,6 +1,6 @@
 const old = { }
 
-module.exports = (start, inc, places, ref) => {
+export default function(start, inc, places, ref) {
   let last
   if (!start) {
     start = '0'

@@ -65,6 +65,6 @@ const options = [
   'Volvo'
 ]
 
-module.exports = () => {
+export default function() {
   return options[Math.floor(Math.random() * options.length)]
 }

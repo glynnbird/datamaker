@@ -731,7 +731,7 @@ const options = [
   'Activities of extraterritorial organizations and bodies',
   'Dormant Company']
 
-module.exports = () => {
+export default function() {
   const r = Math.floor(Math.random() * options.length)
   return options[r]
 }

@@ -1,7 +1,7 @@
-const website = require('./website.js')
-const http_path = require('./http_path.js')
+import website from './website.js'
+import http_path from './http_path.js'
 
-module.exports = function () {
+export default function () {
   const d = website() + http_path()
   return d
 }

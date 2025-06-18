@@ -1,4 +1,4 @@
-module.exports = function (probability) {
+export default function(probability) {
   if (typeof probabilty === 'string') {
     probability = parseFloat(probability)
   }

@@ -1,5 +1,5 @@
-const digits = require('./digits.js')
+import digits from './digits.js'
 
-module.exports = (min, max) => {
+export default function() {
   return digits(5)
 }

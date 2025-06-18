@@ -1,8 +1,9 @@
-const firstname = require('./firstname.js')
-const surname = require('./surname.js')
-const cache = require('../cache.js')
+import firstname from './firstname.js'
+import surname from './surname.js'
+import * as cache from '../cache.js'
 
-module.exports = () => {
+
+export default function() {
   const fn = firstname()
   const sn = surname()
   const retval = fn + ' ' + sn

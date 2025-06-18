@@ -1,5 +1,5 @@
-const cache = require('../cache.js')
+import * as cache from '../cache.js'
 
-module.exports = (tag) => {
+export default function(tag) {
   return cache.get(tag)
 }

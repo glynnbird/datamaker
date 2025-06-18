@@ -44,7 +44,7 @@ const options = [
 ]
 const commonOptions = ['Mr', 'Mr', 'Mrs', 'Ms']
 
-module.exports = () => {
+export default function() {
   if (Math.random() > 0.95) {
     const r = Math.floor(Math.random() * options.length)
     return options[r]

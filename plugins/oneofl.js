@@ -1,7 +1,7 @@
 let lookup = []
 let lookupLength = 0
 let i
-module.exports = (...args) => {
+export default function(...args) {
   // GIGO
   if (args.length === 0) {
     return ''

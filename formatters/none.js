@@ -1,12 +1,8 @@
-const filter = (str) => {
+export function filter(str) {
   return str
 }
 
-const postCommit = (str) => {
+export function postCommit(str) {
   return str
 }
 
-module.exports = {
-  filter,
-  postCommit
-}

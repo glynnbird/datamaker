@@ -1,4 +1,4 @@
-module.exports = (str) => {
+export default function (str) {
   // title case the string
   str = str.toLowerCase()
   if (str.length > 0) {

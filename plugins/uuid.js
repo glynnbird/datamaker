@@ -1,5 +1,5 @@
-const uuidv4 = require('./uuidv4')
+import crypto from 'node:crypto'
 
-module.exports = (length) => {
-  return uuidv4().replace(/-/g, '')
+export default function() {
+  return crypto.randomUUID()
 }

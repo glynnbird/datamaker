@@ -1,6 +1,6 @@
 const options = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
-module.exports = (numLetters) => {
+export default function(numLetters) {
   if (!numLetters || numLetters < 0) {
     numLetters = 5
   }

@@ -1,4 +1,4 @@
-const integer = require('./integer.js')
+import integer from './integer.js'
 
 const isPrime = (num) => {
   if (num <= 1) {
@@ -18,7 +18,7 @@ const isPrime = (num) => {
   return true
 }
 
-module.exports = (min, max) => {
+export default function(min, max) {
   let i
   let attempts = 0
   do {

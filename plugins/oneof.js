@@ -1,4 +1,4 @@
-module.exports = (...args) => {
+export default function(...args) {
   if (args.length === 0) {
     return ''
   }

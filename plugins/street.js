@@ -1,3 +1,4 @@
+import digits from './digits.js'
 const options = [
   'Odette',
   'Newall',
@@ -4502,9 +4503,8 @@ const options = [
 ]
 
 const endings = ['', ' Street', ' Lane', ' Road', ' Circle', ' Avenue']
-const digits = require('./digits.js')
 
-module.exports = () => {
+export default function() {
   const r = Math.floor(Math.random() * options.length)
   let s = options[r]
   if (Math.random() > 0.1) {

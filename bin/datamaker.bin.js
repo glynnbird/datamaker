@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+import { parseArgs } from 'node:util'
+import fs from 'node:fs'
+import path from 'node:path'
+import * as datamaker from '../index.js'
+
 const syntax =
 `Syntax:
 --format/--type/-f       Format of output data: json,csv,none   [default: "none"]
@@ -9,8 +14,9 @@ const syntax =
 --version/-v             Show app version                        [default: false]
 --help/-h                Show app help                           [default: false]
 `
-const app = require('../package.json')
-const { parseArgs } = require('node:util')
+
+const app = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, '..', 'package.json'), { encoding: 'utf8' }))
+
 const argv = process.argv.slice(2)
 const options = {
   format: {
@@ -77,14 +83,13 @@ try {
   process.exit(5)
 }
 
-const fs = require('fs')
-const datagen = require('../index.js')
+
 let template = ''
 const piped = (!process.stdin.isTTY)
 let rs = null
 
 if (values.list) {
-  console.log(datagen.listTags())
+  console.log(datamaker.listTags())
   process.exit(0)
 }
 
@@ -116,11 +121,10 @@ rs.on('readable', () => {
     template += chunk
   }
   template = template.trim()
-}).on('end', () => {
+}).on('end', async () => {
   // when the template has loaded, generate the data
-  datagen.generate(template, values.format, values.iterations)
+  datamaker.generate(template, values.format, values.iterations)
     .on('data', (d) => { console.log(d) })
-    .on('end', (d) => { })
 }).on('error', (e) => {
   die(e, 2)
 })

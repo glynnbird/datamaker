@@ -1,4 +1,4 @@
-const filter = function (str) {
+export function filter(str) {
   return str.replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -6,11 +6,6 @@ const filter = function (str) {
     .replace(/'/g, '&apos;')
 }
 
-const postCommit = function (str) {
+export function postCommit(str) {
   return str.replace(/\n/g, '').replace(/\r/g, '')
-}
-
-module.exports = {
-  filter,
-  postCommit
 }

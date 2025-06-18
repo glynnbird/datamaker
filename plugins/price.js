@@ -1,6 +1,7 @@
-const integer = require('./integer.js')
 
-module.exports = (min, max) => {
+import integer from './integer.js'
+
+export default function(min, max) {
   if (min) {
     min = parseFloat(min)
   }

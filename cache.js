@@ -1,19 +1,14 @@
 let cache = {}
 
-const get = (key) => {
+export function get(key) {
   return cache[key] || ''
 }
 
-const set = (key, value) => {
+export function set(key, value) {
   cache[key] = value
 }
 
-const clear = () => {
+export function clear() {
   cache = {}
 }
 
-module.exports = {
-  get,
-  set,
-  clear
-}

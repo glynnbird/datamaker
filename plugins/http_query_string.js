@@ -1,9 +1,9 @@
-const querystring = require('node:querystring')
-const words = require('./words.js')
-const uuid = require('./uuid.js')
-const integer = require('./integer.js')
+import querystring from 'node:querystring'
+import words from './words.js'
+import uuid from './uuid.js'
+import integer from './integer.js'
 
-module.exports = () => {
+export default function() {
   const paramCount = 1 + Math.floor(Math.random() * 5)
   const obj = {}
   for (let p = 0; p < paramCount; p++) {

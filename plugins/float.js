@@ -1,4 +1,4 @@
-module.exports = (min, max, decimalPlaces) => {
+export default function(min, max, decimalPlaces) {
   if (min) {
     min = parseFloat(min)
   }

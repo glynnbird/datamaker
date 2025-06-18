@@ -1,3 +1,5 @@
+
+import digits from './digits.js'
 const options = [
   '353',
   '44',
@@ -112,9 +114,7 @@ const options = [
   '91'
 ]
 
-const digits = require('./digits.js')
-
-module.exports = () => {
+export default function() {
   const r = Math.floor(Math.random() * options.length)
   return '+' + options[r] + '-' + digits(4) + '-' + digits(3) + '-' + digits(3)
 }

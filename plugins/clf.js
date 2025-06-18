@@ -1,12 +1,13 @@
-const ip = require('./ip.js')
-const firstname = require('./firstname.js')
-const http_method = require('./http_method.js')
-const http_response = require('./http_response.js')
-const http_path = require('./http_path.js')
-const integer = require('./integer.js')
+import ip from './ip.js'
+import firstname from './firstname.js'
+import http_method from './http_method.js'
+import http_response from './http_response.js'
+import http_path from './http_path.js'
+import integer from './integer.js'
+
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 // 127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /apache_pb.gif HTTP/1.1" 200 2326
-module.exports = () => {
+export default function () {
   const bits = []
   bits.push(ip())
   bits.push('-')

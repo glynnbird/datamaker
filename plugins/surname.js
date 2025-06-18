@@ -5001,7 +5001,7 @@ const options = [
   'Hofmann'
 ]
 
-module.exports = () => {
+export default function() {
   const r1 = Math.floor(Math.random() * options.length)
   if (Math.random() > 0.95) {
     const r2 = Math.floor(Math.random() * options.length)

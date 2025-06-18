@@ -1,7 +1,7 @@
-const float = require('./float.js')
-const cities = require('./includes/cities.js')
+import float from './float.js'
+import cities from './includes/cities.js'
 
-module.exports = (cityName) => {
+export default function(cityName) {
   if (cityName) {
     cityName = cityName.trim().toUpperCase()
   }

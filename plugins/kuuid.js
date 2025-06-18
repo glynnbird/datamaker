@@ -1,7 +1,7 @@
-const kuuid = require('kuuid')
-const dateiso = require('./date_iso.js')
+import * as kuuid from 'kuuid'
+import dateiso from './date_iso.js'
 
-module.exports = (min, max) => {
+export default function(min, max) {
   const d = dateiso(min, max)
   return kuuid.id(d)
 }

@@ -1001,7 +1001,7 @@ const options = [
   'takikawa.hokkaido.jp'
 ]
 
-module.exports = () => {
+export default function() {
   const r = Math.floor(Math.random() * options.length)
   return options[r]
 }

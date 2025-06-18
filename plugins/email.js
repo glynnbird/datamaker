@@ -1,11 +1,12 @@
-const firstname = require('./firstname.js')
-const surname = require('./surname.js')
+import firstname from './firstname.js'
+import surname from './surname.js'
+import domainname from './domainname.js'
+import last from './last.js'
+import digits from './digits.js'
 const options = ['.', '', '_', '-']
-const domainname = require('./domainname.js')
-const last = require('./last.js')
-const digits = require('./digits.js')
 
-module.exports = (useLastName) => {
+
+export default function(useLastName) {
   let domain = ''
   if (Math.random() > 0.5) {
     const domains = ['gmail.com', 'hotmail.com', 'yahoo.com']

@@ -1,4 +1,4 @@
-module.exports = {
+export default  {
   LON: {
     bottomLeft: { lat: 51.3611, long: -0.3987 },
     topRight: { lat: 51.66, long: 0.1339 }

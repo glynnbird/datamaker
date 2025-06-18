@@ -3,7 +3,7 @@ const poolSize = 1000
 const int = () => {
   return Math.floor(Math.random() * 65535)
 }
-module.exports = (local) => {
+export default function(local) {
   let ip6
   if (local === 'true') {
     ip6 = ['fc00', int(), int(), int(), int(), int(), int(), int()].map(x => x.toString(16)).join(':')

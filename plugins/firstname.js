@@ -5164,7 +5164,7 @@ const options = [
   'Zulma'
 ]
 
-module.exports = () => {
+export default function() {
   const r = Math.floor(Math.random() * options.length)
   return options[r]
 }

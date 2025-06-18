@@ -160,7 +160,7 @@ results in
 
 Create an XML template e.g. `template.xml`:
 
-```
+```xml
 <?xml version="1.0"?>
 <company>
   <name>{{company}}</name>
@@ -233,8 +233,8 @@ $ echo '{{ name | toLowerCase | sha256 }}' | datamaker
 - `toInt`
 - `toObject`
 - `encodeURIComponent`
-- `escapeSingleQuotes` - replaces single single quotes withe two single quotes, handy when generating SQL.
-- `escapeDoubleQuotes` - replaces single double quotes with two double quotes.
+- `escapeSingleQuotes` - replaces single quotes withe two single quotes, handy when generating SQL.
+- `escapeDoubleQuotes` - replaces double quotes with two double quotes.
 
 Additionally for JSON formats, the following filters can be used within templates to output appropriate JSON datatypes:-
 
@@ -1326,11 +1326,11 @@ e.g.
 You can use this npm module as a library in your own code
 
 ```js
-let dg = require('datamaker')
+import * as datamaker from 'datamaker'
 const template = '{{title}} {{firstname}} {{surname}}'
 const format = 'none'
 const iterations = 500
-dg.generate(template, format, iterations)
+datamaker.generate(template, format, iterations)
   .on('data', (d) => { console.log(d) })
   .on('end', (d) => { console.error('Done!') })
 ```
@@ -1368,11 +1368,11 @@ module.exports = () => {
 The custom plugin can then be referenced in a template using `{{myorg:employeeid}}` as follows:
 
 ```js
-let dg = require('datamaker')
+import * as datamaker from 'datamaker'
 const template = '{{myorg:employeeid}} {{title}} {{firstname}} {{surname}}'
 const format = 'none'
 const iterations = 5
-dg.generate(template, format, iterations)
+datamaker.generate(template, format, iterations)
   .on('data', (d) => { console.log(d) })
   .on('end', (d) => { console.error('Done!') })
 ```

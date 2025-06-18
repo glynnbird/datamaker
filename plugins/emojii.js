@@ -1282,7 +1282,7 @@ const options = [
   '🇿🇼'
 ]
 
-module.exports = (numChars) => {
+export default function(numChars) {
   numChars = (numChars) ? parseInt(numChars) : 1
   let str = ''
   for (let i = 0; i < numChars; i++) {

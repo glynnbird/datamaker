@@ -1,7 +1,7 @@
-const streetGerman = require('./streetGerman.js')
-const cityGerman = require('./cityGerman.js')
-const digits = require('./digits.js')
+import streetGerman from './streetGerman.js'
+import cityGerman from './cityGerman.js'
+import digits from './digits.js'
 
-module.exports = function () {
+export default function() {
   return `${streetGerman()} ${digits(2)}, ${digits(5)} ${cityGerman()}`
 }

@@ -5,7 +5,7 @@ const sample = (mu, sigma) => {
   return z0 * sigma + mu
 }
 
-module.exports = function (mean, stddev, decimalPlaces) {
+export default function(mean, stddev, decimalPlaces) {
   mean = mean ? parseFloat(mean) : 50
   stddev = stddev ? parseFloat(stddev) : 1
   decimalPlaces = decimalPlaces ? parseInt(decimalPlaces) : 4

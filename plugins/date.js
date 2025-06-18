@@ -1,6 +1,6 @@
-const dateiso = require('./date_iso.js')
+import dateiso from './date_iso.js'
 
-module.exports = (min, max) => {
+export default function(min, max) {
   const d = dateiso(min, max)
   const parts = d.split('T')
   return parts[0]

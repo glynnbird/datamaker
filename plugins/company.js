@@ -1,8 +1,8 @@
+import word from './word.js'
 const middle = ['', '', '', '', 'Industries', 'Software', 'Energy', 'Holdings', 'International', 'Stores', 'Mutual']
 const suffix = ['', '', '', '', 'Company', 'Corporation', 'Corp', 'Inc', 'LLC', 'Ltd', 'S.A', 'A.G', 'B.V', 'GmbH', 'SIA', 'Pte. Ltd']
-const word = require('./word.js')
 
-module.exports = () => {
+export default function() {
   const r1 = Math.floor(Math.random() * middle.length)
   const r2 = Math.floor(Math.random() * suffix.length)
   let w = word()

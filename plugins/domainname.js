@@ -1,7 +1,7 @@
-const tld = require('./tld.js')
-const word = require('./word.js')
+import tld from './tld.js'
+import word from './word.js'
 
-module.exports = () => {
+export default function() {
   let t = ''
   if (Math.random() > 0.2) {
     t = 'com'

@@ -1,5 +1,5 @@
-const crypto = require('crypto')
+import crypto from 'node:crypto'
 
-module.exports = (length) => {
+export default function() {
   return crypto.randomUUID()
 }

@@ -1,9 +1,9 @@
-const EventEmitter = require('events')
-const fs = require('fs')
-const path = require('path')
-const formatterNames = fs.readdirSync(path.join(__dirname, 'formatters')).map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
-const cache = require('./cache.js')
-const crypto = require('crypto')
+import { EventEmitter } from 'node:events'
+import fs from 'node:fs'
+import path from 'node:path'
+import * as cache from './cache.js'
+
+const formatterNames = fs.readdirSync(path.join(import.meta.dirname, 'formatters')).map((f) => { return '{{' + f.replace(/\.js$/, '' + '}}') }).join('\n')
 
 const scanForPlugins = (dirPath, arrayOfPlugins = [], namespace) => {
   // checks if the directory exists before trying to scan it
@@ -11,9 +11,9 @@ const scanForPlugins = (dirPath, arrayOfPlugins = [], namespace) => {
     // lists and then iterates over all the files / directories
     fs.readdirSync(dirPath).forEach((file) => {
       // if a directory has been detected it is a custom plugin namespace
-      if (fs.statSync(`${dirPath}/${file}`).isDirectory()) {
+      if (fs.statSync(path.join(dirPath, file)).isDirectory()) {
         // step into the directory to pick up the custom plugins using "file" as the namespace
-        arrayOfPlugins = scanForPlugins(`${dirPath}/${file}`, arrayOfPlugins, file)
+        arrayOfPlugins = scanForPlugins(path.join(dirPath,file), arrayOfPlugins, file)
       } else {
         const plugin = file.replace(/\.js$/, '')
         // if it is a custom namespace it will have a namespace which forms part of the tag name
@@ -28,7 +28,7 @@ const scanForPlugins = (dirPath, arrayOfPlugins = [], namespace) => {
 
 const getPlugins = () => {
   // pick up all the core bundled plugins
-  const bundledPlugins = scanForPlugins(path.join(__dirname, 'plugins'))
+  const bundledPlugins = scanForPlugins(path.join(import.meta.dirname, 'plugins'))
 
   // check for custom plugins that may exist in the root of users applications
   const customPlugins = scanForPlugins(path.join(process.cwd(), 'datamaker', 'plugins'))
@@ -38,7 +38,7 @@ const getPlugins = () => {
 }
 
 const tagNames = getPlugins().join('\n')
-const filterNames = scanForPlugins(path.join(__dirname, 'filters'), []).map((s) => { return s.replace(/{{/g,'').replace(/}}/g,'')})
+const filterNames = scanForPlugins(path.join(import.meta.dirname, 'filters'), []).map((s) => { return s.replace(/{{/g,'').replace(/}}/g,'')})
 
 // locate occurences of things surrounded in double curly {{brackets}}
 const findTags = (str) => {
@@ -95,7 +95,7 @@ const swap = async (template, tags, formatter) => {
       // plugin and require it as normal
       const mod = tag.tag.includes(':')
         ? import(path.join(process.cwd(), 'datamaker', 'plugins', tag.tag.split(':')[0], `${tag.tag.split(':')[1]}.js`))
-        : import(path.join(__dirname, 'plugins', `${tag.tag}.js`))
+        : import(path.join(import.meta.dirname, 'plugins', `${tag.tag}.js`))
 
       const { default: code } = await mod
 
@@ -108,7 +108,7 @@ const swap = async (template, tags, formatter) => {
         for (const j in tag.filter) {
           const filter = tag.filter[j]
           if (filterNames.includes(filter)) {
-            const filterMod = import(path.join(__dirname, 'filters', `${filter}.js`))
+            const filterMod = import(path.join(import.meta.dirname, 'filters', `${filter}.js`))
             const { default: filterCode } = await filterMod
             replacement = await filterCode.apply(null, [replacement])
             if (['toBool', 'toInt', 'toFloat', 'toObject'].includes(filter)) {
@@ -142,7 +142,7 @@ const sleep = async () => {
 
 // generate some data based on the template, the format and the
 // numer of iterations
-const generate = (str, format, iterations) => {
+export function generate(str, format, iterations) {
   const ee = new EventEmitter()
 
   if (format === 'json') {
@@ -161,29 +161,31 @@ const generate = (str, format, iterations) => {
   if (!formatterNames.includes(format)) {
     throw new Error('invalid format')
   }
-  const formatter = require(path.join(__dirname, 'formatters', format))
 
-  // make "iterations" loops
-  let i = 0
-  process.nextTick(async () => {
-    do {
-      const newStr = await swap(str, tags, formatter)
-      // emit the data to the caller
-      ee.emit('data', newStr)
-      // TODO: here will be the saving to a file
-      i++
-      // don't block the node event loop
-      await sleep()
-    } while (i < iterations)
-    cache.clear()
-    ee.emit('end', { count: i })
+  // load the formatter
+  import(path.join(import.meta.dirname, 'formatters', format + '.js')).then((formatter) => {
+    // make "iterations" loops
+    let i = 0
+    process.nextTick(async () => {
+      do {
+        const newStr = await swap(str, tags, formatter)
+        // emit the data to the caller
+        ee.emit('data', newStr)
+        // TODO: here will be the saving to a file
+        i++
+        // don't block the node event loop
+        await sleep()
+      } while (i < iterations)
+      cache.clear()
+      ee.emit('end', { count: i })
+    })
   })
 
   return ee
 }
 
 // list possible tag names
-const listTags = () => {
+export function listTags() {
   let str = `TAGS\n\n${tagNames}\n\n`
   str += `FILTERS\n\n${filterNames.join('\n')}`
   return str
@@ -218,14 +220,14 @@ const iterateLoop = (obj) => {
   return obj
 }
 
-const single = async (str, format) => {
+export async function single(str, format) {
   return new Promise((resolve, reject) => {
     generate(str, format || 'none', 1)
       .on('data', (d) => { resolve(d) })
   })
 }
 
-const batch = async (str, format, iterations) => {
+export async function batch(str, format, iterations) {
   const b = []
   return new Promise((resolve, reject) => {
     generate(str, format || 'none', iterations)
@@ -234,9 +236,9 @@ const batch = async (str, format, iterations) => {
   })
 }
 
-module.exports = {
-  generate,
-  listTags,
-  single,
-  batch
-}
+// module.exports = {
+//   generate,
+//   listTags,
+//   single,
+//   batch
+// }

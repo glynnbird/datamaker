@@ -1,4 +1,4 @@
-module.exports = (min, max) => {
+export default function() {
   const r = Math.random()
   let code
   if (r < 0.95) {

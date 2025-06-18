@@ -1,6 +1,6 @@
 let i = null
 
-module.exports = function (start) {
+export default function (start) {
   if (i === null) {
     i = start || 1
   }

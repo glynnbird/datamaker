@@ -1,4 +1,4 @@
-module.exports = (min, max) => {
+export default function(min, max) {
   if (min === 'now') {
     return new Date().toISOString()
   } else {

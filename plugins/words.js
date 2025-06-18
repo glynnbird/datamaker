@@ -1,6 +1,6 @@
-const word = require('./word.js')
+import word from './word.js'
 
-module.exports = (count) => {
+export default function(count) {
   if (!count) {
     count = 5
   }

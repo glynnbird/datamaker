@@ -1,4 +1,4 @@
-module.exports = (str) => {
+export default function (str) {
   // upper case the string
   return str.toUpperCase()
 }
