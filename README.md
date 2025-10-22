@@ -274,7 +274,7 @@ The code for the tags can be found in the `plugins` folder of the source code.
 - A-E - [addressuk](#addressuk) [addressus](#addressus) [addressgerman](#addressgerman) [airport](#airport) [autoinc](#autoinc) [boolean](#boolean) [cat](#cat) [city](#city) [cityGerman](#cityGerman) [clf](#clf) [company](#company) [country](#country) [creditcard](#creditcard) [currency](#currency) [date](#date) [date_iso](#date_iso) [digits](#digits) [dog](#dog) [domainname](#domainname) [email](#email) [emojii](#emojii) [ethnicity](#ethnicity)
 - F-O - [file](#file) [firstname](#firstname) [float](#float) [http_method](#http_method) [http_path](#http_path) [http_query_string](#http_query_string) [http_reponse](#http_response) [integer](#integer) [ip](#ip) [ip6](#ip6) [kuuid](#kuuid) [kuuidr](#kuuidr) [last](#last) [latitude](#latitude) [letters](#letters) [longitude](#longitude) [mac](#mac) [marque](#marque) [monarch](#monarch) [name](#name) [normal](#normal) [occupation](#occupation) [oneof](#oneof) [oneofl](#oneofl)
 - P-T - [password](#password) [president](#president) [postcode](#postcode) [price](#state) [prime](#prime) [product](#product) [religion](#religion) [sic](#sic) [state](#statecode) [statecode](#statecode) [street](#street) [streetGerman](#streetGerman) [surname](#surname) [tel](#tel) [time](#time) [timestamp](#timestamp) [title](#title) [tld](#tld) [town](#town)
-- U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [uuidv4](#uuidv4) [walk](#walk) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
+- U-Z - [unit](#unit) [url](#url) [uuid](#uuid) [uuidv4](#uuidv4) [uuidv7](#uuidv7) [walk](#walk) [website](#website) [word](#) [words](#words) [youtube](#youtube) [zip](#zip)
 
 ### {{addressuk}}
 
@@ -1235,6 +1235,23 @@ e.g.
 
 ```
 {{uuidv4}} ---> d1e606b0-0452-46a7-9190-8671a82fdea0
+```
+
+### {{uuidv7}}
+
+Unique identifier v7.
+
+Parameters: 
+
+- min (optional) - minimum date
+- max (optional) - maximum date
+
+
+e.g.
+
+```
+{{uuidv7}} ---> 00b0bca5-3cf3-7ba1-a4e7-097295433ee7
+{{uuidv7 1970-01-01 1970-01-02 }} ---> 0000001a-c8d1-7026-a44a-98c438ee931d
 ```
 
 ### {{walk}}
