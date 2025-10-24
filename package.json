@@ -1,6 +1,6 @@
 {
   "name": "datamaker",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "type": "module",
   "description": "Sample data generator - command-line utility and library",
   "main": "index.js",
@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/glynnbird/datamaker#readme",
   "dependencies": {
-    "kuuid": "^3.0.0"
+    "kuuid": "^3.0.1"
   }
 }
